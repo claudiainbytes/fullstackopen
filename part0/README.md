@@ -6,8 +6,8 @@ Full Stack open is a learning platform from University of Helsinki that gets a j
 
 ## [Part 0. Deep Dive Into Modern Web Development](https://fullstackopen.com/en/part0)
 
-- [Exercise 0.4]()
-- [Exercise 0.5]()
-- [Exercise 0.6]()
+- [Exercise 0.4](/04.md)
+- [Exercise 0.5](/05.md)
+- [Exercise 0.6](/06.md)
 
 
