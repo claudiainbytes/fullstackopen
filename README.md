@@ -2,7 +2,7 @@
 
 Full Stack open is a learning platform from University of Helsinki that gets a journey to become a fullstack web developer based in Javascript technologies such React, Redux, Node.js, MongoDB, GraphQL and TypeScript. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.
 
-- [Part 0. Deep Dive Into Modern Web Development][https://fullstackopen.com/en/part0]
+- [Part 0. Deep Dive Into Modern Web Development](https://fullstackopen.com/en/part0)
 - [Part 1. Introduction to React][]
 - [Part 2. Communicating with server][]
 - [Part 3. Programming a server with NodeJS and Express][]
