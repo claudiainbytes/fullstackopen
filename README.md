@@ -4,6 +4,8 @@ Full Stack open is a learning platform from University of Helsinki that gets a j
 
 [https://fullstackopen.com](https://fullstackopen.com)
 
+## Course exercises
+
 - [Part 0. Deep Dive Into Modern Web Development](https://fullstackopen.com/en/part0)
 - [Part 1. Introduction to React]()
 - [Part 2. Communicating with server]()
