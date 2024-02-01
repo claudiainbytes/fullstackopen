@@ -6,7 +6,7 @@ Full Stack open is a learning platform from University of Helsinki that gets a j
 
 ## Course exercises
 
-- [Part 0. Deep Dive Into Modern Web Development](/tree/main/part0)
+- [Part 0. Deep Dive Into Modern Web Development](/part0)
 - [Part 1. Introduction to React]()
 - [Part 2. Communicating with server]()
 - [Part 3. Programming a server with NodeJS and Express]()
