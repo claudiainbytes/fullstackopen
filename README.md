@@ -1,4 +1,4 @@
-# Full Stack open 2024
+# [Full Stack open 2024](/)
 
 Full Stack open is a learning platform from University of Helsinki that gets a journey to become a fullstack web developer based in Javascript technologies such React, Redux, Node.js, MongoDB, GraphQL and TypeScript. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.
 
