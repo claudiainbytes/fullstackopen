@@ -8,13 +8,13 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-Install NPM dependencies:
+Into courseinfo directory, install NPM dependencies:
 
 ```
 npm install
 ```
 
-Run the app:
+Then run the app:
 
 ```
 npm run dev 
