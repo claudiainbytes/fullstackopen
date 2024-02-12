@@ -3,17 +3,6 @@ import { useState } from 'react'
 // Button component defined in a simplified way
 const Button = ({name, handleClick}) => <button onClick={handleClick}>{name}</button>
 
-// Statistics component
-const Statistics = ({all, average, positive}) => {
-  return(
-      <>
-        all {all} <br/>
-        average {average} <br/>
-        positive {positive} %
-      </>
-  )
-}
-
 const App = () => {
   
   // save clicks of each button to its own state, each feedback has two properties, number of collected and score
@@ -95,7 +84,9 @@ const App = () => {
       <p>good {good.collected} <br/>
          neutral {neutral.collected} <br/>
          bad {bad.collected} <br/>
-         <Statistics all={all} average={average} positive={positive}/>
+         all {all} <br/>
+         average {average} <br/>
+         positive {positive} %
       </p>
     </div>
   )
