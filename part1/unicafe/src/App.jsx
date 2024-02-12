@@ -3,14 +3,24 @@ import { useState } from 'react'
 // Button component defined in a simplified way
 const Button = ({name, handleClick}) => <button onClick={handleClick}>{name}</button>
 
-// Statistics component
-const Statistics = ({all, average, positive}) => {
-  return(
+// Statistics component 
+const Statistics = ({good, neutral, bad, all, average, positive}) => {
+  if(all == 0 ) {
+    return(
       <>
+        No feedback given
+      </>
+     )
+  }
+  return(
+      <p>
+        good {good.collected} <br/>
+        neutral {neutral.collected} <br/>
+        bad {bad.collected} <br/>
         all {all} <br/>
         average {average} <br/>
         positive {positive} % 
-      </>
+      </p>
   )
 }
 
@@ -84,7 +94,6 @@ const App = () => {
     setToAverage([good, neutral, newBad], newAll)
     setToPositive(good, newAll)
   }
-
   return (
     <div>
       <h1>give feedback</h1>
@@ -92,11 +101,7 @@ const App = () => {
       <Button name="neutral" handleClick={handleToNeutral}/>&nbsp;
       <Button name="bad" handleClick={handleToBad}/>&nbsp;
       <h1>statistics</h1>
-      <p>good {good.collected} <br/>
-         neutral {neutral.collected} <br/>
-         bad {bad.collected} <br/>
-         <Statistics all={all} average={average} positive={positive}/>
-      </p>
+      <Statistics good={good} neutral={neutral} bad={bad} all={all} average={average} positive={positive}/>
     </div>
   )
 }
