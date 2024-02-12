@@ -3,23 +3,31 @@ import { useState } from 'react'
 // Button component defined in a simplified way
 const Button = ({name, handleClick}) => <button onClick={handleClick}>{name}</button>
 
+// Statistics line component
+const StatisticsLine = (props) => {
+  const {text, value} = props;
+  return(
+    <>{text} {value} {(text == "positive") && '%' }<br/></>
+  )
+}
+
 // Statistics component 
 const Statistics = ({good, neutral, bad, all, average, positive}) => {
   if(all == 0 ) {
     return(
-      <>
+      <p>
         No feedback given
-      </>
+      </p>
      )
   }
   return(
       <p>
-        good {good.collected} <br/>
-        neutral {neutral.collected} <br/>
-        bad {bad.collected} <br/>
-        all {all} <br/>
-        average {average} <br/>
-        positive {positive} % 
+        <StatisticsLine text="good" value={good.collected}/>
+        <StatisticsLine text="neutral" value={neutral.collected}/>
+        <StatisticsLine text="bad" value={bad.collected}/>
+        <StatisticsLine text="all" value={all}/>
+        <StatisticsLine text="average" value={average}/>
+        <StatisticsLine text="positive" value={positive}/>
       </p>
   )
 }
