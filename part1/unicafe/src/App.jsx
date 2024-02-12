@@ -12,7 +12,7 @@ const App = () => {
   const [bad, setBad] = useState({ collected: 0, score: -1})
 
   // statistics states
-
+ 
   const [all, setAll] = useState(0)
   const [average, setAverage] = useState(0)
   const [positive, setPositive] = useState(0)
