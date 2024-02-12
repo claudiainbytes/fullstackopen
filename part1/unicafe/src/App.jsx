@@ -7,7 +7,12 @@ const Button = ({name, handleClick}) => <button onClick={handleClick}>{name}</bu
 const StatisticsLine = (props) => {
   const {text, value} = props;
   return(
-    <>{text} {value} {(text == "positive") && '%' }<br/></>
+    <tbody>
+      <tr>
+        <td>{text}</td> 
+        <td>{value} {(text == "positive") && '%' }</td>
+      </tr>
+    </tbody>
   )
 }
 
@@ -21,14 +26,14 @@ const Statistics = ({good, neutral, bad, all, average, positive}) => {
      )
   }
   return(
-      <p>
-        <StatisticsLine text="good" value={good.collected}/>
-        <StatisticsLine text="neutral" value={neutral.collected}/>
-        <StatisticsLine text="bad" value={bad.collected}/>
-        <StatisticsLine text="all" value={all}/>
-        <StatisticsLine text="average" value={average}/>
-        <StatisticsLine text="positive" value={positive}/>
-      </p>
+      <table>
+          <StatisticsLine text="good" value={good.collected}/>
+          <StatisticsLine text="neutral" value={neutral.collected}/>
+          <StatisticsLine text="bad" value={bad.collected}/>
+          <StatisticsLine text="all" value={all}/>
+          <StatisticsLine text="average" value={average}/>
+          <StatisticsLine text="positive" value={positive}/>
+      </table>
   )
 }
 
