@@ -3,6 +3,22 @@ import { useState } from 'react'
 // Button component defined in a simplified way
 const Button = ({name, handleClick}) => <button onClick={handleClick}>{name}</button>
 
+// Most Voted Anecdote
+const MostVoted = ({ mostVoted }) => { 
+  if (mostVoted.length > 0 ){
+    return(
+      <>
+        <p>{mostVoted[0].anecdote} <br/> has {mostVoted[0].points} votes</p>
+      </>
+    )
+  }
+  return (
+    <>
+      <p>By now there are not votes for any anecdote</p>
+    </>
+  )
+}
+
 const App = () => {
 
   const anecdotes = [
@@ -18,6 +34,18 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState(anecdotes.map(ele => 0))
+  const [mostVoted, setMostVoted] = useState([])
+
+  const setToMostVoted = (points) => {
+    const maxPointsValue = Math.max(...points)
+    const arrMostVoted = []
+    for (var i = 0; i < points.length; i++) {
+      if (points[i] === maxPointsValue) {
+          arrMostVoted.push({anecdote: anecdotes[i], points: points[i]})
+      }
+    }
+    setMostVoted(arrMostVoted)
+  }
 
   const setRandomAnecdote = () => {
     const newSelected = Math.floor(Math.random() * anecdotes.length)
@@ -28,13 +56,18 @@ const App = () => {
     const newPoints = [ ...points ]
     newPoints[selected] += 1
     setPoints(newPoints)
+    setToMostVoted(newPoints)
   }
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       {anecdotes[selected]} <br/>
-      <Button name="vote" handleClick={setToVote} />
-      <Button name="next anecdote" handleClick={setRandomAnecdote}/>
+      <Button name="vote" handleClick={setToVote} />&nbsp;
+      <Button name="next anecdote" handleClick={setRandomAnecdote}/><br/>
+      has {points[selected]} votes
+      <h2>Anecdote with most votes</h2>
+      <MostVoted mostVoted={mostVoted} />
     </div>
   )
 }
