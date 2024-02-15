@@ -41,6 +41,7 @@ const Course = ({course}) => {
     <>
       <Header course={course}/>
       <Content parts={course.parts}/> 
+      <Total parts={course.parts}/>
     </>
   )
 }
