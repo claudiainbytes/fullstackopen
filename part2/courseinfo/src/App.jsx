@@ -27,14 +27,9 @@ const Content = (props) => {
   )
 }
 
-const Total = (props) => {
-  let total = 0
-  props.parts.forEach((part) => { total += part.exercises })
-  return (
-    <>
-      <p><b>total of {total} exercises</b></p>
-    </>
-  )
+const Total = ({parts}) => {
+  const total = parts.reduce((sum, part) => sum + part.exercises, 0)
+  return <p><b>total of {total} exercises</b></p>
 }
 
 const Course = ({course}) => {
@@ -74,7 +69,6 @@ const App = () => {
       }
     ]
   }
-  console.log(Object.values(course))
   return <Course course={course} />
 }
 
