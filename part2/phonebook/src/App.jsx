@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import personService from './services/person'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
@@ -12,12 +12,10 @@ const App = () => {
   const [filterPerson, setFilterPerson] = useState('')
 
   const persons_db_hook = () => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
+     personService
+      .getAll()
+      .then(allPersons => {
+        setPersons(allPersons)
       })
   }
   useEffect(persons_db_hook, [])
@@ -40,6 +38,7 @@ const App = () => {
     event.preventDefault()
     if (isPersonExist(newName)) {
      alert(`${newName} is already added to phonebook`)
+     setNewName('')
     } else if(isPersonNumberExist(newNumber)) {
         alert(`${newNumber} is already added to phonebook`)
     } else {
@@ -48,13 +47,13 @@ const App = () => {
                             name: newName, 
                             number: newNumber 
                           }
-        axios
-          .post('http://localhost:3001/persons', newPerson)
-          .then(response => {
-            setPersons(persons.concat(response.data))
+        personService
+          .create(newPerson)
+          .then( createdPerson => {
+            setPersons(persons.concat(createdPerson))
             setNewName('')
             setNewNumber('')
-          })                  
+          })                    
       }
     } 
   }
