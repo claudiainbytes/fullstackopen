@@ -34,11 +34,31 @@ const App = () => {
     setFilterPerson(event.target.value)
   }
   
+  const updatePerson = (name, newNumber) => {
+    const currentPerson = persons.find((person) => person.name === name.trim())
+    if (newNumber.length > 0) {
+      const changePerson = { 
+                          ...currentPerson, 
+                          number: newNumber 
+                        }                
+      personService
+        .update(currentPerson.id, changePerson)
+        .then( modifiedPerson => {
+          setPersons(persons.map(person => person.id !== currentPerson.id ? person: modifiedPerson))
+          setNewName('')
+          setNewNumber('')
+        })                    
+    }
+  }
+
   const addPerson = (event) => {
     event.preventDefault()
     if (isPersonExist(newName)) {
-     alert(`${newName} is already added to phonebook`)
-     setNewName('')
+     if(confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+        updatePerson(newName, newNumber)
+     } else {
+      setNewName('')
+     }
     } else if(isPersonNumberExist(newNumber)) {
         alert(`${newNumber} is already added to phonebook`)
     } else {
