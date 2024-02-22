@@ -3,6 +3,7 @@ import personService from './services/person'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 const App = () => {
 
@@ -10,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterPerson, setFilterPerson] = useState('')
+  const [successMessage, setSuccessMessage] = useState(null)
 
   const persons_db_hook = () => {
      personService
@@ -44,6 +46,10 @@ const App = () => {
       personService
         .update(currentPerson.id, changePerson)
         .then( modifiedPerson => {
+          setSuccessMessage(`Updated ${modifiedPerson.name} which new phone number is ${modifiedPerson.number}`)
+          setTimeout(() => {
+            setSucessMessage(null)
+          }, 5000)
           setPersons(persons.map(person => person.id !== currentPerson.id ? person: modifiedPerson))
           setNewName('')
           setNewNumber('')
@@ -70,6 +76,11 @@ const App = () => {
         personService
           .create(newPerson)
           .then( createdPerson => {
+            console.log(createdPerson)
+            setSuccessMessage(`Added ${createdPerson.name}`)
+            setTimeout(() => {
+              setSucessMessage(null)
+            }, 5000)
             setPersons(persons.concat(createdPerson))
             setNewName('')
             setNewNumber('')
@@ -95,6 +106,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={successMessage} />
       <Filter inputName={filterPerson} eventName={handleFilterPersonByNameChange} />
       <h2>add a new</h2>
       <PersonForm addPerson={addPerson} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
