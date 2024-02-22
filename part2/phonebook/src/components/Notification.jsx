@@ -4,8 +4,8 @@ const Notification = ({ message }) => {
     }
   
     return (
-      <div className="success">
-        {message}
+      <div className={message.classname}>
+        {message.message}
       </div>
     )
   }
