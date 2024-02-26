@@ -31,7 +31,7 @@ app.get('/api/persons', (request, response) => {
 
 app.get('/api/info', (request, response) => {
     const date = new Date();
-    const message = `<p>Phonebook has info for ${persons.length} people<br/>${ date }</p>`
+    const message = `<p>Phonebook has info for ${persons.length} people<br/>${ date } </p>`
     response.send(message)
 })
 
