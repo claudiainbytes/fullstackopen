@@ -60,8 +60,20 @@ app.post('/api/persons', (request, response) => {
     return response.status(400).json({ 
       error: 'name is missing' 
     })
-  }
+  } 
 
+  if (!body.number) {
+    return response.status(400).json({ 
+      error: 'number is missing' 
+    })
+  } 
+  
+  if(persons.filter(person => person.name === body.name).length === 1) {
+      return response.status(403).json({ 
+        error: 'name already exists' 
+      })
+  } 
+  
   const person = {
     id: generateRandomId(),
     name: body.name,
