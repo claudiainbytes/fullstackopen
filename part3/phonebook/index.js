@@ -25,6 +25,8 @@ let persons =
     }
 ]
 
+app.use(express.json())
+
 app.get('/api/persons', (request, response) => {
   response.json(persons)
 })
@@ -43,7 +45,34 @@ app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     persons = persons.filter(person => person.id !== id)
     response.status(204).end()
-  })
+})
+
+const generateRandomId = () => {
+  const randomId = Math.floor((Math.random() * 100) + 1)
+  const lastId = Math.max(...persons.map(person => person.id))
+  return persons.filter(person => person.id === randomId).length === 0 ? randomId : (lastId + 1) 
+}
+
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+
+  if (!body.name) {
+    return response.status(400).json({ 
+      error: 'name is missing' 
+    })
+  }
+
+  const person = {
+    id: generateRandomId(),
+    name: body.name,
+    number: body.number,
+  }
+
+  persons = persons.concat(person)
+
+  response.json(person)
+
+})
 
 app.get('/api/info', (request, response) => {
     const date = new Date();
