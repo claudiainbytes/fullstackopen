@@ -1,0 +1,7 @@
+POST https://fullstackopen-mnqr.onrender.com/api/persons HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Isabella", 
+    "number": "856-7894562"
+}
