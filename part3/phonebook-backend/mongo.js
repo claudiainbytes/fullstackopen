@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-// node mongo.js tmCqYPwNYKhPbyrS Anna 040-1234556
-// node mongo.js tmCqYPwNYKhPbyrS "Arto Vihavainen" 045-1232456
 
 if (process.argv.length<3) {
   console.log('give password as argument')
