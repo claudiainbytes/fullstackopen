@@ -1,29 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const mongoose = require('mongoose')
-
-const password = process.argv[2]
-
-const url = `mongodb+srv://claudiainbytes:${password}@fullstackopen2024.s3dz2se.mongodb.net/phonebookDB?retryWrites=true&w=majority&appName=fullstackopen2024`
-
-mongoose.set('strictQuery',false)
-mongoose.connect(url)
-
-const personSchema = new mongoose.Schema({ 
-    "name": String,
-    "number": String
-})
-
-personSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
-})
-
-const Person = mongoose.model('Person', personSchema)
+const Person = require('./models/person') 
 
 const app = express()
 app.use(cors())
@@ -110,7 +89,7 @@ app.get('/api/info', (request, response) => {
     response.send(message)
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
