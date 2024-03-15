@@ -13,8 +13,8 @@ let persons = []
 app.get('/api/persons', (request, response) => {
   Person
         .find({})
-        .then(persons => {
-          response.json(persons)
+        .then(allPersons => {
+          response.json(allPersons)
         })
 })
 
@@ -22,7 +22,7 @@ app.use(express.json())
 
 morgan.token('body', function (req, res) { return JSON.stringify({ "body": req.body }) } )
 
-morgan.token('respon', function (req, res) { return JSON.stringify({ "persons": res.persons })} )
+morgan.token('respon', function (req, res) { return JSON.stringify({ "persons": persons })} )
 
 const customMorgan = ':method :url :status :response-time ms - :res[content-length] :body - :respon'
 
@@ -65,22 +65,25 @@ app.post('/api/persons', (request, response) => {
     })
   } 
   
-  if(persons.filter(person => person.name === body.name).length === 1) {
-      return response.status(403).json({ 
-        error: 'name already exists' 
-      })
-  } 
-  
-  const person = {
-    id: generateRandomId(),
+  const person = new Person({ 
     name: body.name,
     number: body.number,
-  }
+  })
 
-  persons = persons.concat(person)
-
-  response.json(person)
-
+  Person
+        .findOne({ name: person.name })
+        .then(existPerson => {
+           if(existPerson !== null) {
+            return response.status(403).json({ 
+              error: 'name already exists' 
+            })
+           } else {
+            person.save().then(savedPerson => {
+              response.json(savedPerson)
+            })
+           }
+            
+        })
 })
 
 app.get('/api/info', (request, response) => {
