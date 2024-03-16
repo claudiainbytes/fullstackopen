@@ -30,7 +30,12 @@ app.use(express.json())
 app.use(express.static('dist'))
 app.use(morgan(customMorgan))
 
-let persons = []
+app.get('/api/info', async(request, response) => {
+  const date = new Date()
+  const total = await Person.countDocuments() 
+  const message = `<p>Phonebook has info for ${total} people<br/>${ date } </p>`
+    response.send(message)
+})
 
 app.get('/api/persons', (request, response) => {
   Person
@@ -111,13 +116,6 @@ app.put('/api/persons/:id', (request, response, next) => {
       response.json(updatedPerson)
     })
     .catch(error => next(error))
-})
-
-app.get('/api/info', async(request, response) => {
-    const date = new Date()
-    const total = await Person.countDocuments() 
-    const message = `<p>Phonebook has info for ${total} people<br/>${ date } </p>`
-      response.send(message)
 })
 
 app.use(unknownEndpoint)
