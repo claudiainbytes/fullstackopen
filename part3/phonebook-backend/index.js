@@ -92,15 +92,11 @@ app.post('/api/persons', (request, response) => {
         })
 })
 
-app.get('/api/info', (request, response) => {
+app.get('/api/info', async(request, response) => {
     const date = new Date()
-    Person
-      .countDocuments()
-      .then(count => { 
-        const message = `<p>Phonebook has info for ${count} people<br/>${ date } </p>`
-        response.send(message)
-      })
-      .catch(err => console.log(err)) 
+    const total = await Person.countDocuments() 
+    const message = `<p>Phonebook has info for ${total} people<br/>${ date } </p>`
+      response.send(message)
 })
 
 const PORT = process.env.PORT 
