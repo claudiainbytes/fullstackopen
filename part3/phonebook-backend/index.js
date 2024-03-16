@@ -29,13 +29,19 @@ const customMorgan = ':method :url :status :response-time ms - :res[content-leng
 app.use(morgan(customMorgan))
 
 app.get('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    const person = persons.find((person) => person.id === id)
-    if(!person) {
-        response.status(404).end()
-    } else {
-        response.json(person)
-    }   
+    Person
+        .findById(request.params.id)
+        .then(person => {
+           if(person) {
+            response.json(person)
+           } else {
+            response.status(404).end()
+           }
+        })
+        .catch(err => { 
+          console.log(err)
+          response.status(400).send({ error: 'malformatted id'})
+        } )
 })
 
 app.delete('/api/persons/:id', (request, response) => {
@@ -87,9 +93,14 @@ app.post('/api/persons', (request, response) => {
 })
 
 app.get('/api/info', (request, response) => {
-    const date = new Date();
-    const message = `<p>Phonebook has info for ${persons.length} people<br/>${ date } </p>`
-    response.send(message)
+    const date = new Date()
+    Person
+      .countDocuments()
+      .then(count => { 
+        const message = `<p>Phonebook has info for ${count} people<br/>${ date } </p>`
+        response.send(message)
+      })
+      .catch(err => console.log(err)) 
 })
 
 const PORT = process.env.PORT 
