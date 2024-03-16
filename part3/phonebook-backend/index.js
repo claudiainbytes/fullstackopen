@@ -6,9 +6,7 @@ const Person = require('./models/person')
 
 morgan.token('body', function (req, res) { return JSON.stringify({ "body": req.body }) } )
 
-morgan.token('respon', function (req, res) { return JSON.stringify({ "persons": persons })} )
-
-const customMorgan = ':method :url :status :response-time ms - :res[content-length] :body - :respon'
+const customMorgan = ':method :url :status :response-time ms - :res[content-length] :body'
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
