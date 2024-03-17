@@ -91,7 +91,14 @@ const App = () => {
             setPersons(persons.concat(createdPerson))
             setNewName('')
             setNewNumber('')
-          })                    
+          })
+          .catch( error => {
+            setMessage({ message: error.response.data.error, classname:'error' })
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
+          }
+        )                    
       }
     } 
   }
