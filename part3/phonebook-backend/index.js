@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const Person = require('./models/person') 
+const Person = require('./models/person').default
 
 morgan.token('body', function (req, res) { return JSON.stringify({ "body": req.body }) } )
 
@@ -32,74 +34,74 @@ app.use(morgan(customMorgan))
 
 app.get('/api/info', async(request, response) => {
   const date = new Date()
-  const total = await Person.countDocuments() 
+  const total = await Person.countDocuments()
   const message = `<p>Phonebook has info for ${total} people<br/>${ date } </p>`
-    response.send(message)
+  response.send(message)
 })
 
 app.get('/api/persons', (request, response) => {
   Person
-        .find({})
-        .then(allPersons => {
-          response.json(allPersons)
-        })
+    .find({})
+    .then(allPersons => {
+      response.json(allPersons)
+    })
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
-    Person
-          .findById(request.params.id)
-          .then(person => {
-            if(person) {
-              response.json(person)
-            } else {
-              response.status(404).end()
-            }
-          })
-          .catch(error => next(error))
+  Person
+    .findById(request.params.id)
+    .then(person => {
+      if(person) {
+        response.json(person)
+      } else {
+        response.status(404).end()
+      }
+    })
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
-    Person
-        .findByIdAndDelete(request.params.id)
-        .then(result => {
-          response.status(204).end()
-        })
-        .catch(error => next(error))
+  Person
+    .findByIdAndDelete(request.params.id)
+    .then(result => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
 })
 
 app.post('/api/persons', (request, response, next) => {
   const { name, number } = request.body
 
-  if (name == undefined) {
-    return response.status(400).json({ 
-      error: 'name is missing' 
+  if (name === undefined) {
+    return response.status(400).json({
+      error: 'name is missing'
     })
-  } 
+  }
 
-  if (number == undefined) {
-    return response.status(400).json({ 
-      error: 'number is missing' 
+  if (number === undefined) {
+    return response.status(400).json({
+      error: 'number is missing'
     })
-  } 
-  
+  }
+
   Person
-        .findOne({ name })
-        .then(existPerson => {
-           if(existPerson) {
-            return response.status(403).json({ 
-              error: 'name already exists' 
-            })
-           } else {
-            const person = new Person({ name, number })
-            person
-                .save()
-                .then(savedPerson => {
-                    response.json(savedPerson)
-                })
-                .catch(error => next(error))
-           }
+    .findOne({ name })
+    .then(existPerson => {
+      if(existPerson) {
+        return response.status(403).json({
+          error: 'name already exists'
         })
-        .catch(error => next(error))
+      } else {
+        const person = new Person({ name, number })
+        person
+          .save()
+          .then(savedPerson => {
+            response.json(savedPerson)
+          })
+          .catch(error => next(error))
+      }
+    })
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
@@ -117,7 +119,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 app.use(unknownEndpoint)
 app.use(errorHandler)
 
-const PORT = process.env.PORT 
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
