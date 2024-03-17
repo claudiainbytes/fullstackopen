@@ -17,6 +17,8 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
   }
 
   next(error)
@@ -65,51 +67,47 @@ app.delete('/api/persons/:id', (request, response, next) => {
         .catch(error => next(error))
 })
 
-app.post('/api/persons', (request, response) => {
-  const body = request.body
+app.post('/api/persons', (request, response, next) => {
+  const { name, number } = request.body
 
-  if (!body.name) {
+  if (name == undefined) {
     return response.status(400).json({ 
       error: 'name is missing' 
     })
   } 
 
-  if (!body.number) {
+  if (number == undefined) {
     return response.status(400).json({ 
       error: 'number is missing' 
     })
   } 
   
-  const person = new Person({ 
-    name: body.name,
-    number: body.number,
-  })
-
   Person
-        .findOne({ name: person.name })
+        .findOne({ name })
         .then(existPerson => {
-           if(existPerson !== null) {
+           if(existPerson) {
             return response.status(403).json({ 
               error: 'name already exists' 
             })
            } else {
-            person.save().then(savedPerson => {
-              response.json(savedPerson)
-            })
+            const person = new Person({ name, number })
+            person
+                .save()
+                .then(savedPerson => {
+                    response.json(savedPerson)
+                })
+                .catch(error => next(error))
            }
-            
         })
+        .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
-  const body = request.body
+  const { name, number } = request.body
 
-  const person = {
-    name: body.name,
-    number: body.number,
-  }
+  const person = { name, number }
 
-  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+  Person.findByIdAndUpdate(request.params.id, person, { new: true, runValidators: true, context: 'query' })
     .then(updatedPerson => {
       response.json(updatedPerson)
     })
