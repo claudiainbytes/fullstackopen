@@ -4,7 +4,7 @@ require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const Person = require('./models/person').default
+const Person = require('./models/person')
 
 morgan.token('body', function (req, res) { return JSON.stringify({ "body": req.body }) } )
 
