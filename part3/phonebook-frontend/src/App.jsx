@@ -14,7 +14,7 @@ const App = () => {
   const [message, setMessage] = useState(null)
 
   const persons_db_hook = () => {
-     personService
+    personService
       .getAll()
       .then(allPersons => {
         setPersons(allPersons)
@@ -54,7 +54,7 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
-        .catch( error => {
+        .catch( () => {
             setMessage({ message: `Information of ${currentPerson.name} has already been removed from server`, classname:'error' })
             setTimeout(() => {
               setMessage(null)
@@ -107,15 +107,15 @@ const App = () => {
     if(confirm(`Delete ${person.name}?`)){
         personService
           .deleteP(person)
-          .then( message => {
+          .then( () => {
             setMessage({ message: `${person.name} has been deleted`, classname:'success' })
             setTimeout(() => {
               setMessage(null)
             }, 5000)
             setPersons(persons.filter(p => p.id !== person.id))
           })             
-          .catch( error => {
-              setMessage({ message: `Information of ${person.name} has already been removed from server`, classname:'error' })
+          .catch( () => {
+              setMessage({ message: `Information of ${person.name} has already been removed from server`, classname: 'error' })
               setTimeout(() => {
                 setMessage(null)
               }, 5000)
