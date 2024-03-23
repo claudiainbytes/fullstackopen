@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/persons/65f4674ec9f93d13925bb8ee HTTP/1.1
+content-type: application/json
+
+{
+     "name": "Danna Abramova", 
+     "number": "12-43-888888"
+}

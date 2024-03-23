@@ -1,0 +1,1 @@
+GET https://fullstackopen-mnqr.onrender.com/api/persons
