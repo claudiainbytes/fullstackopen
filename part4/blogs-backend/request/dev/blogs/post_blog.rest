@@ -2,8 +2,9 @@ POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json 
 
 {
-     "title": "Mia Colucci goes to la francia",
+     "title": "Design patterns for React",
      "author": "John Davis",
      "url": "https://www.example.com/effective-project-management-tips",
-     "likes": 1203
+     "likes": 1203,
+     "userId": "66044ad827c34285729e51de"
 } 
