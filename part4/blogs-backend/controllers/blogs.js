@@ -28,35 +28,15 @@ blogsRouter.post('/', async (request, response, next) => {
         error: 'url is missing'
         })
     }
-
-    /*
-    Blog
-        .findOne({ title })
-        .then(existTitle => {
-            if(existTitle) {
-                return response.status(403).json({
-                error: 'title already exists'
-            })
-            } else {
-                const blog = new Blog( { title, author, url, likes })
-                blog
-                    .save()
-                    .then(savedBlog => {
-                        response.status(201).json(savedBlog)
-                    })
-                    .catch(error => next(error))
-            }
-        })
-        .catch(error => next(error))*/
      
-    const existTitle = await Blog.findOne({title}).catch(error => next(error))
+    const existTitle = await Blog.findOne({title})
     if(existTitle){
         return response.status(403).json({
             error: 'title already exists'
         })
     } else {
         const blog = new Blog( { title, author, url, likes })
-        const savedBlog = await blog.save().catch(error => next(error))
+        const savedBlog = await blog.save()
         response.status(201).json(savedBlog)
     }
 

@@ -1,67 +1,25 @@
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const helper = require('../utils/test_helper')
 const app = require('../app')
 
 const api = supertest(app)
 
 const Blog = require('../models/blog')
 
-const initialBlogs = [{
-  "title": "React patterns",
-  "author": "Michael Chan",
-  "url": "https://reactpatterns.com/",
-  "likes": 7
-},
-{
-  "title": "Go To Statement Considered Harmful",
-  "author": "Edsger W. Dijkstra",
-  "url": "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
-  "likes": 5
-},
-{
-  "title": "Canonical string reduction",
-  "author": "Edsger W. Dijkstra",
-  "url": "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
-  "likes": 12
-},
-{
-  "title": "First class tests",
-  "author": "Robert C. Martin",
-  "url": "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
-  "likes": 10
-},
-{
-  "title": "TDD harms architecture",
-  "author": "Robert C. Martin",
-  "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
-  "likes": 0
-},
-{
-  "title": "Type wars",
-  "author": "Robert C. Martin",
-  "url": "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
-  "likes": 2
-}]
-
 beforeEach( async () => {
   await Blog.deleteMany({})
-  let blogObject = new Blog(initialBlogs[0])
-  await blogObject.save()
-  blogObject = new Blog(initialBlogs[1])
-  await blogObject.save()
-  blogObject = new Blog(initialBlogs[2])
-  await blogObject.save()
-  blogObject = new Blog(initialBlogs[3])
-  await blogObject.save()
-  blogObject = new Blog(initialBlogs[4])
-  await blogObject.save()
-  blogObject = new Blog(initialBlogs[5])
-  await blogObject.save()
+  console.log('cleared')
+
+  const blogObjects = helper.initialBlogs.map(blog => new Blog(blog))
+  const promiseArray = blogObjects.map(blog => blog.save())
+  await Promise.all(promiseArray)
+
 })
 
-test('all blogs are returned', async () => {
+test('return the corrent amount of blog post', async () => {
   const response = await api.get('/api/blogs')
-  expect(response.body).toHaveLength(initialBlogs.length)
+  expect(response.body).toHaveLength(helper.initialBlogs.length)
 })
 
 test('unique identifier named as id', async () => {
@@ -82,15 +40,15 @@ test('creates a new blog post', async () => {
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
-  const response = await api.get('/api/blogs')
+  const blogsAtEnd = await helper.blogsInDb()
 
-  const contents = response.body.map(r => r.title)
+  const contents = blogsAtEnd.map(r => r.title)
 
-  expect(response.body).toHaveLength(initialBlogs.length + 1)
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
   expect(contents).toContain(
     '5 Agile Estimation Tips'
   )
-  expect(response.body[0].id).toBeDefined()
+  expect(blogsAtEnd[0].id).toBeDefined()
 })
 
 
@@ -106,8 +64,8 @@ test('likes property is missing from the request', async () => {
     .expect('Content-Type', /application\/json/)
     .expect(201)
 
-  const response = await api.get('/api/blogs')
-  const likesbycontent =  response.body[(initialBlogs.length)]
+  const blogsAtEnd = await helper.blogsInDb()
+  const likesbycontent =  blogsAtEnd[(helper.initialBlogs.length)]
   expect(likesbycontent.likes).toBe(0)
 
 })
@@ -124,6 +82,6 @@ test('title or url properties are missing from the request data', async () => {
 
 })
 
-afterAll(() => {
-  mongoose.connection.close()
+afterAll( async() => {
+  await mongoose.connection.close()
 })
