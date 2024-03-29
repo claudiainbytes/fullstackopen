@@ -65,10 +65,14 @@ blogsRouter.delete('/:id', async (request, response) => {
     }
 
     if(blog.user.toString() === user.id.toString()) {
-        user.blogs = user.blogs.filter(
-            (blog) => JSON.stringify(blog.id) !== JSON.stringify(request.params.id)
+        let updateUserBlogs = user.blogs.filter(
+            (blog) => {
+                return blog._id.toString() !== request.params.id
+            }
         )
-        await Blog.findByIdAndDelete(blog.id)
+        user.set({ blogs: updateUserBlogs })
+        user.save()
+        await Blog.findByIdAndDelete(blog.id.toString())
         response.status(204).end() 
     } else {
         response.status(401).json({ error: 'no permission: cannot delete blog' })
