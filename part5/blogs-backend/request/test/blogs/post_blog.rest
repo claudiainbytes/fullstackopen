@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs HTTP/1.1
+content-type: application/json 
+
+{
+     "title": "Cicero is a dummy text",
+     "author": "John Davis",
+     "url": "https://www.example.com/effective-project-management-tips",
+     "likes": 1203
+} 
