@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm'
 import LogoutForm from './components/LogoutForm'
 import BlogForm from './components/BlogForm'
 import BlogList from './components/BlogList'
+import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -14,7 +15,7 @@ const App = () => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
   const [user, setUser] = useState(null)
-  const [createBlogVisible, setCreateBlogVisible] = useState(false)
+  //const [createBlogVisible, setCreateBlogVisible] = useState(false)
 
   useEffect(() => {
     blogService
@@ -44,11 +45,6 @@ const App = () => {
   const handleBlogAuthor = ({ target }) => setNewBlog({ ...newBlog, author: target.value })
 
   const handleBlogURL = ({ target }) => setNewBlog({ ...newBlog, url: target.value })
-
-  const handleCreateBlogVisible = (event) => {
-    event.preventDefault()
-    createBlogVisible ? setCreateBlogVisible(false) : setCreateBlogVisible(true)
-  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -134,15 +130,15 @@ const App = () => {
             />
       )}
       { user !== null && ( 
-             <BlogForm 
-                newBlog={newBlog} 
-                handleBlogTitle={handleBlogTitle} 
-                handleBlogAuthor={handleBlogAuthor} 
-                handleBlogURL={handleBlogURL}
-                handleAddBlog={handleAddBlog}
-                createBlogVisible={createBlogVisible}
-                handleCreateBlogVisible={handleCreateBlogVisible}
-              /> 
+        <Togglable buttonLabel="Create blog">
+            <BlogForm 
+              newBlog={newBlog} 
+              handleBlogTitle={handleBlogTitle} 
+              handleBlogAuthor={handleBlogAuthor} 
+              handleBlogURL={handleBlogURL}
+              handleAddBlog={handleAddBlog}
+            /> 
+        </Togglable>
       )}
       { user !== null && ( 
             <BlogList blogs={blogs}/> 
