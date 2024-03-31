@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
 import Notification from './components/Notification'
+import LoginForm from './components/LoginForm'
+import LogoutForm from './components/LogoutForm'
+import BlogForm from './components/BlogForm'
+import BlogList from './components/BlogList'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -11,6 +14,7 @@ const App = () => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
   const [user, setUser] = useState(null)
+  const [createBlogVisible, setCreateBlogVisible] = useState(false)
 
   useEffect(() => {
     blogService
@@ -30,6 +34,21 @@ const App = () => {
   }, [])
 
   const isBlogExist = (newBlog) => blogs.find((blog) => (blog.name === newBlog.name && blog.author === newBlog.author)) ? true : false
+
+  const handleUsername = ({ target }) => setUsername(target.value)
+
+  const handlePassword = ({ target }) => setPassword(target.value)
+
+  const handleBlogTitle = ({ target }) => setNewBlog({ ...newBlog, title: target.value })
+
+  const handleBlogAuthor = ({ target }) => setNewBlog({ ...newBlog, author: target.value })
+
+  const handleBlogURL = ({ target }) => setNewBlog({ ...newBlog, url: target.value })
+
+  const handleCreateBlogVisible = (event) => {
+    event.preventDefault()
+    createBlogVisible ? setCreateBlogVisible(false) : setCreateBlogVisible(true)
+  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -64,31 +83,7 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogAppUser')
   }
 
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-        <div>
-            <label htmlFor="username">Username &nbsp;</label>
-            <input
-            type="text"
-            value={username}
-            name="username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-            <label htmlFor="password">Password &nbsp;</label>
-            <input
-            type="password"
-            value={password}
-            name="password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-    </form>
-  )
-
-  const addBlog = (event) => {
+  const handleAddBlog = (event) => {
     event.preventDefault()
 
     if(isBlogExist(newBlog)){
@@ -119,65 +114,39 @@ const App = () => {
     }
   }
 
-  const blogForm = () => { 
-    const { title, author, url } = newBlog
-    return(
-      <form onSubmit={addBlog}>
-        <div>
-              <label htmlFor="title">Title &nbsp;</label>
-              <input
-              type="text"
-              value={title}
-              name="title"
-              onChange={({ target }) => setNewBlog({ ...newBlog, title: target.value })}
-            />
-        </div>
-        <div>
-              <label htmlFor="author">Author &nbsp;</label>
-              <input
-              type="text"
-              value={author}
-              name="author"
-              onChange={({ target }) => setNewBlog({ ...newBlog, author: target.value })}
-            />
-        </div>
-        <div>
-              <label htmlFor="url">URL &nbsp;</label>
-              <input
-              type="text"
-              value={url}
-              name="url"
-              onChange={({ target }) => setNewBlog({ ...newBlog, url: target.value })}
-            />
-        </div>
-        <button type="submit">Create</button>
-      </form>  
-    )
-  } 
-
-  const blogLogout = () => (
-    <div>
-      <p>Welcome {user.name }&nbsp;<button type="button" onClick={handleLogout}>Logout</button></p>
-    </div>
-  )
-
-  const blogList = () => (
-    <div>
-      <h2>Blogs</h2>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
-        )} 
-    </div>
-  )
-  
   return (
     <div>
       <h1>Blogs App</h1>
       <Notification message={message} />
-      { user === null && loginForm() }
-      { user !== null && blogLogout() }
-      { user !== null && blogForm() }
-      { user !== null && blogList() }
+      { user === null && (
+            <LoginForm 
+                handleLogin={handleLogin} 
+                handleUsername={handleUsername} 
+                handlePassword={handlePassword} 
+                username={username} 
+                password={password}
+             /> 
+      )}
+      { user !== null && ( 
+            <LogoutForm 
+                user={user} 
+                handleLogout={handleLogout} 
+            />
+      )}
+      { user !== null && ( 
+             <BlogForm 
+                newBlog={newBlog} 
+                handleBlogTitle={handleBlogTitle} 
+                handleBlogAuthor={handleBlogAuthor} 
+                handleBlogURL={handleBlogURL}
+                handleAddBlog={handleAddBlog}
+                createBlogVisible={createBlogVisible}
+                handleCreateBlogVisible={handleCreateBlogVisible}
+              /> 
+      )}
+      { user !== null && ( 
+            <BlogList blogs={blogs}/> 
+      )}
     </div>
   )
 }
