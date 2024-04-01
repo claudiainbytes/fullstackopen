@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import LogoutForm from './components/LogoutForm'
@@ -9,13 +9,14 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 
 const App = () => {
+
   const [blogs, setBlogs] = useState([])
-  const [newBlog, setNewBlog] = useState({ title: "", author: "", url: "", likes: 0 })
   const [message, setMessage] = useState(null)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
   const [user, setUser] = useState(null)
-  //const [createBlogVisible, setCreateBlogVisible] = useState(false)
+
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService
@@ -34,17 +35,9 @@ const App = () => {
     }
   }, [])
 
-  const isBlogExist = (newBlog) => blogs.find((blog) => (blog.name === newBlog.name && blog.author === newBlog.author)) ? true : false
-
   const handleUsername = ({ target }) => setUsername(target.value)
 
   const handlePassword = ({ target }) => setPassword(target.value)
-
-  const handleBlogTitle = ({ target }) => setNewBlog({ ...newBlog, title: target.value })
-
-  const handleBlogAuthor = ({ target }) => setNewBlog({ ...newBlog, author: target.value })
-
-  const handleBlogURL = ({ target }) => setNewBlog({ ...newBlog, url: target.value })
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -79,37 +72,6 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogAppUser')
   }
 
-  const handleAddBlog = (event) => {
-    event.preventDefault()
-
-    if(isBlogExist(newBlog)){
-      setMessage({ message: `The blog to add  ${newBlog.title} by ${newBlog.author} exists`, classname:'error' })
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
-      setNewBlog({ title: "", author: "", url: "", likes: 0 })
-    } else {
-      const blogObject = newBlog
-  
-      blogService
-        .create(blogObject)
-          .then(returnedBlog => {
-            setMessage({ message: `A new blog  ${returnedBlog.title} by ${returnedBlog.author} added`, classname:'success' })
-            setTimeout(() => {
-              setMessage(null)
-            }, 5000)
-            setBlogs(blogs.concat(returnedBlog))
-            setNewBlog({ title: "", author: "", url: "", likes: 0 })
-          })
-          .catch(error => {
-            setMessage({ message: error.response.data.error, classname:'error' })
-            setTimeout(() => {
-              setMessage(null)
-            }, 5000)
-          })
-    }
-  }
-
   return (
     <div>
       <h1>Blogs App</h1>
@@ -130,18 +92,12 @@ const App = () => {
             />
       )}
       { user !== null && ( 
-        <Togglable buttonLabel="Create blog">
-            <BlogForm 
-              newBlog={newBlog} 
-              handleBlogTitle={handleBlogTitle} 
-              handleBlogAuthor={handleBlogAuthor} 
-              handleBlogURL={handleBlogURL}
-              handleAddBlog={handleAddBlog}
-            /> 
+        <Togglable buttonLabel="Create blog" ref={blogFormRef}>
+            <BlogForm blogs={blogs} setMessage={setMessage} setBlogs={setBlogs} blogFormRef={blogFormRef}/> 
         </Togglable>
       )}
       { user !== null && ( 
-            <BlogList blogs={blogs}/> 
+            <BlogList blogs={blogs} setMessage={setMessage}/> 
       )}
     </div>
   )

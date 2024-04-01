@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, forwardRef } from 'react'
 
-const Blog = (props) => {
+const Blog = forwardRef((props, ref) => {
 
   const blog = props.blog
 
@@ -20,6 +20,7 @@ const Blog = (props) => {
     borderWidth: 1,
     marginBottom: 5
   }
+
   return(
     <div style={blogStyle}>
       <div style={hideWhenVisible}>
@@ -34,6 +35,6 @@ const Blog = (props) => {
     </div>
   )
 
-}
+})
 
 export default Blog
