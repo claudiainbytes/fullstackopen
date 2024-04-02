@@ -11,6 +11,7 @@ const BlogDeleteButton = (props) => {
           .remove(blog)
           .then(response => {
             setMessage({ message: response, classname:'success' })
+            sortBlogs()
             setTimeout(() => {
                 setMessage(null)
             }, 5000)
@@ -21,9 +22,7 @@ const BlogDeleteButton = (props) => {
               setTimeout(() => {
                   setMessage(null)
               }, 5000)
-          })
-        
-        sortBlogs() 
+          }) 
       }
          
     }

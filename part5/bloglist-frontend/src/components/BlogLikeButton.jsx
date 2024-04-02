@@ -19,6 +19,7 @@ const BlogLikeButton = (props) => {
           .update(blog.id, blogObject)
           .then(returnedBlog => {
             setLikes(returnedBlog.likes)
+            sortBlogs() 
           })
           .catch(error => {
               console.log(error)
@@ -26,9 +27,7 @@ const BlogLikeButton = (props) => {
               setTimeout(() => {
                   setMessage(null)
               }, 5000)
-          })
-        
-        sortBlogs()  
+          }) 
     }
 
     return(

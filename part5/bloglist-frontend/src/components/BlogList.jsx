@@ -3,10 +3,11 @@ import BlogLikeButton from './BlogLikeButton'
 import BlogDeleteButton from './BlogDeleteButton'
 import React from 'react'
 
-const BlogList = ({ blogs, setMessage, setBlogs }) => {
-
-    const sortBlogs = () => { blogs.sort((blogA, blogB) => blogB.likes - blogA.likes ) }
-
+const BlogList = ({ blogs, setMessage, sortBlogs }) => {
+   
+    if(blogs.length == 0) {
+      console.log("blogs vacias")
+    }    
     sortBlogs()
 
     return(

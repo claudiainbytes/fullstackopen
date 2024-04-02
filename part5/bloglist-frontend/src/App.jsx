@@ -21,8 +21,8 @@ const App = () => {
   useEffect(() => {
     blogService
       .getAll()
-      .then(blogs =>
-        setBlogs( blogs )
+      .then(blogs => 
+        setBlogs(blogs)
       )  
   }, [blogs])
 
@@ -33,7 +33,9 @@ const App = () => {
       setUser(user)
       blogService.setToken(user.token)
     }
-  }, [])
+  }, [blogs])
+
+  const sortBlogs = () => blogs.sort((blogA, blogB) => blogB.likes - blogA.likes )
 
   const handleUsername = ({ target }) => setUsername(target.value)
 
@@ -71,7 +73,6 @@ const App = () => {
     setUser(null)
     window.localStorage.removeItem('loggedBlogAppUser')
   }
-
   return (
     <div>
       <h1>Blogs App</h1>
@@ -83,7 +84,7 @@ const App = () => {
                 handlePassword={handlePassword} 
                 username={username} 
                 password={password}
-             /> 
+            /> 
       )}
       { user !== null && ( 
             <LogoutForm 
@@ -93,14 +94,15 @@ const App = () => {
       )}
       { user !== null && ( 
         <Togglable buttonLabel="Create blog" ref={blogFormRef}>
-            <BlogForm blogs={blogs} setMessage={setMessage} setBlogs={setBlogs} blogFormRef={blogFormRef}/> 
+            <BlogForm blogs={blogs} setMessage={setMessage} setBlogs={setBlogs} sortBlogs={sortBlogs} blogFormRef={blogFormRef}/> 
         </Togglable>
       )}
-      { user !== null && ( 
-            <BlogList blogs={blogs} setMessage={setMessage} setBlogs={setBlogs}/> 
+      { ( user !== null && blogs.length > 0) && ( 
+            <BlogList blogs={blogs} setMessage={setMessage} sortBlogs={sortBlogs}/> 
       )}
     </div>
   )
+  
 }
 
 export default App
