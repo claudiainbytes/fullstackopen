@@ -1,6 +1,6 @@
-import { useState, forwardRef } from 'react'
+import { useState } from 'react'
 
-const Blog = forwardRef((props, ref) => {
+const Blog = (props) => {
 
   const blog = props.blog
 
@@ -31,10 +31,10 @@ const Blog = forwardRef((props, ref) => {
         {blog.title}&nbsp;
         <button onClick={toggleVisibility}>Hide</button>
         {props.children}
-      </div> 
+      </div>
     </div>
   )
 
-})
+}
 
 export default Blog

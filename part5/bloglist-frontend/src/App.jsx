@@ -12,8 +12,8 @@ const App = () => {
 
   const [blogs, setBlogs] = useState([])
   const [message, setMessage] = useState(null)
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
   const blogFormRef = useRef()
@@ -21,9 +21,9 @@ const App = () => {
   useEffect(() => {
     blogService
       .getAll()
-      .then(blogs => 
+      .then(blogs =>
         setBlogs(blogs)
-      )  
+      )
   }, [blogs])
 
   useEffect(() => {
@@ -50,9 +50,7 @@ const App = () => {
         username, password,
       })
 
-      window.localStorage.setItem(
-        'loggedBlogAppUser', JSON.stringify(user)
-      ) 
+      window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
 
       blogService.setToken(user.token)
 
@@ -61,7 +59,7 @@ const App = () => {
       setPassword('')
 
     } catch (exception) {
-      setMessage({ message: `Wrong username or password`, classname:'error' })
+      setMessage({ message: 'Wrong username or password', classname:'error' })
       setTimeout(() => {
         setMessage(null)
       }, 5000)
@@ -78,31 +76,31 @@ const App = () => {
       <h1>Blogs App</h1>
       <Notification message={message} />
       { user === null && (
-            <LoginForm 
-                handleLogin={handleLogin} 
-                handleUsername={handleUsername} 
-                handlePassword={handlePassword} 
-                username={username} 
-                password={password}
-            /> 
+        <LoginForm
+          handleLogin={handleLogin}
+          handleUsername={handleUsername}
+          handlePassword={handlePassword}
+          username={username}
+          password={password}
+        />
       )}
-      { user !== null && ( 
-            <LogoutForm 
-                user={user} 
-                handleLogout={handleLogout} 
-            />
+      { user !== null && (
+        <LogoutForm
+          user={user}
+          handleLogout={handleLogout}
+        />
       )}
-      { user !== null && ( 
+      { user !== null && (
         <Togglable buttonLabel="Create blog" ref={blogFormRef}>
-            <BlogForm blogs={blogs} setMessage={setMessage} setBlogs={setBlogs} sortBlogs={sortBlogs} blogFormRef={blogFormRef}/> 
+          <BlogForm blogs={blogs} setMessage={setMessage} setBlogs={setBlogs} sortBlogs={sortBlogs} blogFormRef={blogFormRef}/>
         </Togglable>
       )}
-      { ( user !== null && blogs.length > 0) && ( 
-            <BlogList blogs={blogs} setMessage={setMessage} sortBlogs={sortBlogs}/> 
+      { ( user !== null && blogs.length > 0) && (
+        <BlogList blogs={blogs} setMessage={setMessage} sortBlogs={sortBlogs}/>
       )}
     </div>
   )
-  
+
 }
 
 export default App
