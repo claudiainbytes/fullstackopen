@@ -11,14 +11,22 @@ const BlogList = ({ blogs, setMessage, setBlogs }) => {
     return(
         <div>
           <h2>Blogs</h2>
-            {blogs.map(blog =>
-                <Blog key={blog.id} blog={blog}>
-                  <div>
-                    <span>{blog.url}</span><br/>
-                    <BlogLikeButton blog={blog} setMessage={setMessage} sortBlogs={sortBlogs}/><br/>
-                    <span>{blog.author}</span><br/>
-                  </div>
-                </Blog>
+            {blogs.map(blog => {
+                const showBlogUserName = () => {
+                  if(Object.prototype.hasOwnProperty.call(blog, 'user')){
+                    return(<><span>{blog.user.name}</span><br/></>)
+                  }
+                }
+                return(
+                    <Blog key={blog.id} blog={blog}>
+                      <div>
+                        <span>{blog.url}</span><br/>
+                        <BlogLikeButton blog={blog} setMessage={setMessage} sortBlogs={sortBlogs}/><br/>
+                        { showBlogUserName() }
+                      </div>
+                    </Blog>
+                )
+              }  
             )} 
         </div>
     )

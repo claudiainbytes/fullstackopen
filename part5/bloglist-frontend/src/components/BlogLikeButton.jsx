@@ -4,7 +4,7 @@ import blogService from './../services/blogs'
 const BlogLikeButton = (props) => {
 
     const { blog, setMessage, sortBlogs } = props
-
+    
     const [likes, setLikes] = useState(blog.likes)
 
     const handleAddLike = (event) => {
