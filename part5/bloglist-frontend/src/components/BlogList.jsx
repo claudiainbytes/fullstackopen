@@ -1,5 +1,6 @@
 import Blog from './Blog'
 import BlogLikeButton from './BlogLikeButton'
+import BlogDeleteButton from './BlogDeleteButton'
 import React from 'react'
 
 const BlogList = ({ blogs, setMessage, setBlogs }) => {
@@ -14,7 +15,10 @@ const BlogList = ({ blogs, setMessage, setBlogs }) => {
             {blogs.map(blog => {
                 const showBlogUserName = () => {
                   if(Object.prototype.hasOwnProperty.call(blog, 'user')){
-                    return(<><span>{blog.user.name}</span><br/></>)
+                    return(<>
+                      <span>{blog.user.name}</span><br/>
+                      <BlogDeleteButton blog={blog} setMessage={setMessage} sortBlogs={sortBlogs}/><br/>
+                    </>)
                   }
                 }
                 return(
@@ -23,6 +27,7 @@ const BlogList = ({ blogs, setMessage, setBlogs }) => {
                         <span>{blog.url}</span><br/>
                         <BlogLikeButton blog={blog} setMessage={setMessage} sortBlogs={sortBlogs}/><br/>
                         { showBlogUserName() }
+                        
                       </div>
                     </Blog>
                 )

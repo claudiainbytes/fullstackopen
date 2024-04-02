@@ -22,8 +22,20 @@ const create = async newObject => {
 }
 
 const update = (id, newObject) => {
-  const request = axios.put(`${ baseUrl }/${id}`, newObject)
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const request = axios.put(`${ baseUrl }/${id}`, newObject, config)
   return request.then(response => response.data)
 }
 
-export default { getAll, create, update, setToken }
+const remove = (objectToRemove) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const request = axios.delete(`${baseUrl}/${objectToRemove.id}`, config)
+  return request.then(response => `The blog ${objectToRemove.title} by ${objectToRemove.author} has been removed` )
+}
+
+export default { getAll, create, update, remove, setToken }
