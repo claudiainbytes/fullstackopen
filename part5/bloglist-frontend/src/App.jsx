@@ -24,7 +24,7 @@ const App = () => {
       .then(blogs =>
         setBlogs( blogs )
       )  
-  }, [])
+  }, [blogs])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
@@ -97,7 +97,7 @@ const App = () => {
         </Togglable>
       )}
       { user !== null && ( 
-            <BlogList blogs={blogs} setMessage={setMessage}/> 
+            <BlogList blogs={blogs} setMessage={setMessage} setBlogs={setBlogs}/> 
       )}
     </div>
   )

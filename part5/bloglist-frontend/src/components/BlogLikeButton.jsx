@@ -1,24 +1,24 @@
+import { useState } from 'react'
 import blogService from './../services/blogs'
 
 const BlogLikeButton = (props) => {
 
-    const { blog, setMessage } = props
+    const { blog, setMessage, sortBlogs } = props
 
-    const handleAddLike = () => {
-       
+    const [likes, setLikes] = useState(blog.likes)
+
+    const handleAddLike = (event) => {
+        event.stopPropagation()
+
         const blogObject = {
           ...blog,
-          likes: blog.likes + 1
+          likes: likes + 1
         }  
     
         blogService
           .update(blog.id, blogObject)
           .then(returnedBlog => {
-            setMessage({ message: `Liked`, classname:'success' })
-            setTimeout(() => {
-                setMessage(null)
-            }, 1000)
-            blog.likes = returnedBlog.likes
+            setLikes(returnedBlog.likes)
           })
           .catch(error => {
               console.log(error)
@@ -27,11 +27,12 @@ const BlogLikeButton = (props) => {
                   setMessage(null)
               }, 5000)
           })
-           
+        
+        sortBlogs()  
     }
 
     return(
-        <><span>Likes: {blog.likes}</span><button onClick={handleAddLike}>Like</button></>
+        <><span>Likes: {likes}</span><button onClick={handleAddLike}>Like</button></>
     )
 }
 
