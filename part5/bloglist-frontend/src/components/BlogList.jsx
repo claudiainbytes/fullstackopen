@@ -5,9 +5,6 @@ import React from 'react'
 
 const BlogList = ({ blogs, setMessage, sortBlogs }) => {
 
-  if(blogs.length === 0) {
-    console.log('blogs vacias')
-  }
   sortBlogs()
 
   return(
@@ -28,7 +25,6 @@ const BlogList = ({ blogs, setMessage, sortBlogs }) => {
               <span>{blog.url}</span><br/>
               <BlogLikeButton blog={blog} setMessage={setMessage} sortBlogs={sortBlogs}/><br/>
               { showBlogUserName() }
-
             </div>
           </Blog>
         )

@@ -83,6 +83,13 @@ blogsRouter.delete('/:id', async (request, response) => {
 })
 
 blogsRouter.put('/:id', async (request, response) => {
+
+    if(request.user === undefined){
+        response.status(401).json({ error: 'token is missing' })
+    }
+
+    const user = request.user
+
     const { title, author, url, likes } = request.body
     const blog = { title, author, url, likes }
     const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true, runValidators: true, context: 'query' })
