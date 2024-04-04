@@ -22,7 +22,6 @@ const BlogLikeButton = (props) => {
         sortBlogs()
       })
       .catch(error => {
-        console.log(error)
         setMessage({ message: error.response.data.error, classname:'error' })
         setTimeout(() => {
           setMessage(null)
@@ -31,7 +30,7 @@ const BlogLikeButton = (props) => {
   }
 
   return(
-    <><span>Likes: {likes}</span><button onClick={handleAddLike}>Like</button></>
+    <><span className='blog-likes'>Likes: {likes}</span><button className='blog-like-button' onClick={handleAddLike}>Like</button></>
   )
 }
 

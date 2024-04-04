@@ -28,7 +28,7 @@ const BlogDeleteButton = (props) => {
   }
 
   return(
-    <button onClick={handleBlogDelete}>Remove</button>
+    <button className="blog-remove" onClick={handleBlogDelete}>Remove</button>
   )
 }
 

@@ -23,12 +23,12 @@ const Blog = (props) => {
 
   return(
     <div style={blogStyle}>
-      <div style={hideWhenVisible}>
-        {blog.title}&nbsp;
+      <div className="blog-container-toggle" style={hideWhenVisible}>
+        <span className="blog-title">{blog.title}</span>&nbsp;
         <button onClick={toggleVisibility}>View</button>
       </div>
-      <div style={showWhenVisible}>
-        {blog.title}&nbsp;
+      <div className="blog-container-toggle" style={showWhenVisible}>
+        <span className="blog-title">{blog.title}</span>&nbsp;
         <button onClick={toggleVisibility}>Hide</button>
         {props.children}
       </div>

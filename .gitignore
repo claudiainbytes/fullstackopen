@@ -3,3 +3,5 @@ part3-notes-backend
 part2-notes-frontend
 .env
 /part4/phonebook-backend
+/part5/bloglist-frontend/src/components/Note.jsx
+/part5/bloglist-frontend/tests/Note.test.js

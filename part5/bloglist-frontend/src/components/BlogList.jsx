@@ -14,7 +14,7 @@ const BlogList = ({ blogs, setMessage, sortBlogs }) => {
         const showBlogUserName = () => {
           if(Object.prototype.hasOwnProperty.call(blog, 'user')){
             return(<>
-              <span>{blog.user.name}</span><br/>
+              <span className="blog-author">{blog.user.name}</span><br/>
               <BlogDeleteButton blog={blog} setMessage={setMessage} sortBlogs={sortBlogs}/><br/>
             </>)
           }
@@ -22,7 +22,7 @@ const BlogList = ({ blogs, setMessage, sortBlogs }) => {
         return(
           <Blog key={blog.id} blog={blog}>
             <div>
-              <span>{blog.url}</span><br/>
+              <span className="blog-url">{blog.url}</span><br/>
               <BlogLikeButton blog={blog} setMessage={setMessage} sortBlogs={sortBlogs}/><br/>
               { showBlogUserName() }
             </div>
