@@ -6,4 +6,14 @@
 
 Exercises 
 
+- [bloglist-frontend](/part5/bloglist-frontend)
 - [blogs-backend](/part5/blogs-backend)
+
+Execute for testing with Cypress
+
+- Run front
+    - npm run dev
+- Run back
+    - npm run start:test
+- Run cypress
+    - npm run cypress:open
