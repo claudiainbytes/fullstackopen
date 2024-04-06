@@ -96,7 +96,7 @@ const App = () => {
         </Togglable>
       )}
       { ( user !== null && blogs.length > 0) && (
-        <BlogList blogs={blogs} setMessage={setMessage} sortBlogs={sortBlogs}/>
+        <BlogList blogs={blogs} setMessage={setMessage} sortBlogs={sortBlogs} user={user}/>
       )}
     </div>
   )

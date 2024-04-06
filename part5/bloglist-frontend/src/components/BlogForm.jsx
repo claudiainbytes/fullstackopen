@@ -55,6 +55,7 @@ const BlogForm = ({ blogs, setMessage, setBlogs, sortBlogs, blogFormRef }) => {
           type="text"
           value={title}
           name="title"
+          id="title"
           onChange={handleBlogTitle}
         />
       </div>
@@ -64,6 +65,7 @@ const BlogForm = ({ blogs, setMessage, setBlogs, sortBlogs, blogFormRef }) => {
           type="text"
           value={author}
           name="author"
+          id="author"
           onChange={handleBlogAuthor}
         />
       </div>
@@ -73,10 +75,11 @@ const BlogForm = ({ blogs, setMessage, setBlogs, sortBlogs, blogFormRef }) => {
           type="text"
           value={url}
           name="url"
+          id="url"
           onChange={handleBlogURL}
         />
       </div>
-      <button type="submit">Create</button>
+      <button type="submit" id="create-blog-button">Create</button>
     </form>
   )
 }

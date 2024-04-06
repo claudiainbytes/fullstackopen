@@ -22,7 +22,7 @@ const Blog = (props) => {
   }
 
   return(
-    <div style={blogStyle}>
+    <div className="blog-container" style={blogStyle}>
       <div className="blog-container-toggle" style={hideWhenVisible}>
         <span className="blog-title">{blog.title}</span>&nbsp;
         <button onClick={toggleVisibility}>View</button>
