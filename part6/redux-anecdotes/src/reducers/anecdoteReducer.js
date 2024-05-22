@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 
 const anecdotesAtStart = [
     'If it hurts, do it more often',
@@ -34,7 +34,7 @@ const anecdotesSlice = createSlice({
         const objAnecdote = state.find(a => a.id === id )
         objAnecdote.votes++
         state = orderByVotes(state)
-        //console.log('state now: ', current(state))
+        console.log('state', current(state))
         return state
     },
     createAnecdote(state, action) {
