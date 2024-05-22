@@ -1,12 +1,14 @@
-import AcnedoteForm from './components/AcnedoteForm'
-import AcnedoteList from './components/AcnedoteList'
+import AnecdoteForm from './components/AnecdoteForm'
+import AnecdoteList from './components/AnecdoteList'
+import AnecdoteFilter from './components/AnecdoteFilter'
 
 const App = () => {
   return (
     <div>
       <h2>Anecdotes</h2>
-      <AcnedoteList/>
-      <AcnedoteForm/>
+      <AnecdoteFilter/>
+      <AnecdoteList/>
+      <AnecdoteForm/>
     </div>
   )
 }

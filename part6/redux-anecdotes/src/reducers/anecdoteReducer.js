@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit'
+
 const anecdotesAtStart = [
     'If it hurts, do it more often',
     'Adding manpower to a late software project makes it later!',
@@ -17,44 +19,34 @@ const asObject = (anecdote) => {
   }
 }
 
-const initialState = { anecdotes: anecdotesAtStart.map(asObject) }
+const initialState = anecdotesAtStart.map(asObject) 
 
 const orderByVotes = (anecdotes) => {
   return anecdotes.sort((a, b) => b.votes - a.votes)
 }
 
-const reducer = (state = initialState, action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
-  if(action.type === 'ADD_VOTE' ){
-    const objAnecdote = state.anecdotes.find(a => a.id === action.payload.id )
-    objAnecdote.votes++
-    const anecdotes = state.anecdotes.map(a => (a.id === objAnecdote.id) ? objAnecdote : a ) 
-    return { ...state, anecdotes: orderByVotes(anecdotes) }
-  }
-  if(action.type === 'ADD_ANECDOTE' ){
-    const anecdotes = state.anecdotes.concat(action.payload)
-    return { ...state, anecdotes }
-  }
-  return state
-}
+const anecdotesSlice = createSlice({
+  name: 'anecdotes',
+  initialState,
+  reducers: {
+    addVote(state, action) {
+        const id = action.payload.id
+        const objAnecdote = state.find(a => a.id === id )
+        objAnecdote.votes++
+        state = orderByVotes(state)
+        //console.log('state now: ', current(state))
+        return state
+    },
+    createAnecdote(state, action) {
+        const anecdotes = state.concat({ 
+            content: action.payload,
+            id: getId(),
+            votes: 0
+          })
+        return anecdotes 
+    }
+  },
+})
 
-export const voteByID = (id) => {
-  return {
-    type: 'ADD_VOTE',
-    payload: { id } 
-  }
-}
-
-export const createAnecdote = (anecdote) => {
-  return {
-    type: 'ADD_ANECDOTE',
-    payload: { 
-      content: anecdote,
-      id: getId(),
-      votes: 0
-    } 
-  }
-}
-
-export default reducer
+export const { createAnecdote, addVote } = anecdotesSlice.actions
+export default anecdotesSlice.reducer
