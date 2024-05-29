@@ -7,3 +7,5 @@
 Exercises 
 
 - [unicafe-redux](/part6/unicafe-redux)
+- [redux-anecdotes](/part6/redux-anecdotes)
+- [query-anecdotes](/part6/query-anecdotes)
