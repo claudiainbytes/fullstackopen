@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { filterAnecdotes } from '../reducers/filterReducer'
-import { getNotification } from '../reducers/notificationReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
 const AnecdoteFilter = () => {
     
@@ -9,10 +9,7 @@ const AnecdoteFilter = () => {
     const handleFilterAnecdotes = (e) => {
         const filter = e.target.value
         dispatch(filterAnecdotes(filter))
-        dispatch(getNotification(`Filter by: ${filter}`))
-        setTimeout(() => {
-            dispatch(getNotification(``))
-        }, 5000)
+        dispatch(setNotification(`Filter by: ${filter}`))
     }
 
     return (
