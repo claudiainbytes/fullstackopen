@@ -25,7 +25,7 @@ const App = () => {
     notificationDispatch({ type: "VOTE", payload: anecdote.content })
     setTimeout(() => {
        notificationDispatch({ type: "EMPTY" })
-    }, 1000)
+    }, 5000)
   }
 
   const result = useQuery({

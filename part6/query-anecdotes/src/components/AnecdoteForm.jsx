@@ -14,26 +14,24 @@ const AnecdoteForm = () => {
           onSuccess: (newAnecdote) => {
             const anecdotes = queryClient.getQueryData(['anecdotes'])
             queryClient.setQueryData(['anecdotes'], anecdotes.concat(newAnecdote))
+          },
+          onError: (error, variables, context) => {
+            dispatch({ type: "REJECTED" })
+            setTimeout(() => {
+              dispatch({ type: "EMPTY" })
+            }, 5000)
           }
   })
 
   const onCreate = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
-    if (content.length >= 5 ){
-      event.target.anecdote.value = ''
-      newAnecdoteMutation.mutate({ content, votes: 0 })
-      dispatch({ type: "CREATE", payload: content })
-      setTimeout(() => {
-        dispatch({ type: "EMPTY" })
-      }, 1000)
-    } else {
-        dispatch({ type: "REJECTED" })
-        setTimeout(() => {
-          dispatch({ type: "EMPTY" })
-        }, 1000)
-    }
-    
+    event.target.anecdote.value = ''
+    newAnecdoteMutation.mutate({ content, votes: 0 })
+    dispatch({ type: "CREATE", payload: content })
+    setTimeout(() => {
+      dispatch({ type: "EMPTY" })
+    }, 5000)    
 }
 
   return (
