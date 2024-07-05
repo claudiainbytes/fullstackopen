@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useField } from './hooks'
+
 import {
   Routes,
   Route,
@@ -7,7 +9,6 @@ import {
   useNavigate,
   useMatch
 } from "react-router-dom"
-
 
 import Menu from './components/Menu'
 import NotificationMessage from './components/Notification'
@@ -18,6 +19,11 @@ import CreateNew from './components/CreateNew'
 import Footer from './components/Footer'
 
 const App = () => {
+
+  const content = useField('text')
+  const author = useField('text')
+  const info = useField('text')
+
   const [anecdotes, setAnecdotes] = useState([
     {
       content: 'If it hurts, do it more often',
@@ -77,7 +83,7 @@ const App = () => {
         <Route path="/anecdotes/:id" element={ <Anecdote anecdote={anecdote} />} />
         <Route path="/anecdotes" element={ <AnecdoteList anecdotes={anecdotes} /> } />
         <Route path="/about" element={ <About />} />
-        <Route path="/create" element={ <CreateNew addNew={addNew} />} />
+        <Route path="/create" element={ <CreateNew addNew={addNew} content={content} author={author} info={info} />} />
       </Routes>
       <Footer />
     </div>

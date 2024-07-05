@@ -3,19 +3,19 @@ import { useNavigate } from "react-router-dom"
 
 const CreateNew = (props) => {
 
-    const navigate = useNavigate()
+    const content = props.content
+    const author =  props.author
+    const info = props.info
 
-    const [content, setContent] = useState('')
-    const [author, setAuthor] = useState('')
-    const [info, setInfo] = useState('')
-  
+    const navigate = useNavigate()
   
     const handleSubmit = (e) => {
       e.preventDefault()
+      console.log(content.value)
       props.addNew({
-        content,
-        author,
-        info,
+        content: content.value,
+        author: author.value,
+        info: info.value,
         votes: 0
       })
       navigate(`/anecdotes/`)
@@ -27,15 +27,15 @@ const CreateNew = (props) => {
         <form onSubmit={handleSubmit}>
           <div>
             content
-            <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+            <input {...content} />
           </div>
           <div>
             author
-            <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+            <input {...author} />
           </div>
           <div>
             url for more info
-            <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+            <input {...info} />
           </div>
           <button>create</button>
         </form>
