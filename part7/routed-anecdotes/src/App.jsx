@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useField } from './hooks'
 
 import {
   Routes,
@@ -19,10 +18,6 @@ import CreateNew from './components/CreateNew'
 import Footer from './components/Footer'
 
 const App = () => {
-
-  const content = useField('text')
-  const author = useField('text')
-  const info = useField('text')
 
   const [anecdotes, setAnecdotes] = useState([
     {
@@ -83,7 +78,7 @@ const App = () => {
         <Route path="/anecdotes/:id" element={ <Anecdote anecdote={anecdote} />} />
         <Route path="/anecdotes" element={ <AnecdoteList anecdotes={anecdotes} /> } />
         <Route path="/about" element={ <About />} />
-        <Route path="/create" element={ <CreateNew addNew={addNew} content={content} author={author} info={info} />} />
+        <Route path="/create" element={ <CreateNew addNew={addNew} />} />
       </Routes>
       <Footer />
     </div>
@@ -93,10 +88,3 @@ const App = () => {
 export default App
 
 
-/*
-  setMessage({ message: error.response.data.error, classname:'error' })
-            setTimeout(() => {
-              setMessage(null)
-            }, 5000)
-
-*/
