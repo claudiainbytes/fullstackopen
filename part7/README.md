@@ -7,3 +7,6 @@
 Exercises 
 
 - [routed-anecdotes](/part7/routed-anecdotes)
+- [ultimate-hooks](/part7/ultimate-hooks)
+- [country-hook](/part7/country-hook)
+- [extended-bloglist](/part7/extended-bloglist)

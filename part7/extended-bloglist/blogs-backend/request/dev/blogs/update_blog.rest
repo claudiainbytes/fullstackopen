@@ -1,0 +1,11 @@
+PUT http://localhost:3003/api/blogs/6602f73f4fd495fe43a3cdea HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2NjA0NGFkODI3YzM0Mjg1NzI5ZTUxZGUiLCJpYXQiOjE3MTIwNjg4ODIsImV4cCI6MTcxMjA3MjQ4Mn0.zmdOCqTFCyqxA8GWcdVhRrDSc_svouhn0VM5UhZKZ0E 
+
+
+{
+     "title": "React patterns 2",
+     "author": "Michael Chan",
+     "url": "https://www.example.com/effective-project-management-tips-2",
+     "likes": 10
+} 
