@@ -7,10 +7,15 @@ import BlogList from './components/BlogList';
 import Togglable from './components/Togglable';
 import blogService from './services/blogs';
 import loginService from './services/login';
+import { useNotificationValue, useNotificationDispatch } from './context/BloglistContext';
 
 const App = () => {
+
+  const notification = useNotificationValue()
+  const notificationDispatch = useNotificationDispatch()
+
   const [blogs, setBlogs] = useState([]);
-  const [message, setMessage] = useState(null);
+  //const [message, setMessage] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
@@ -54,9 +59,9 @@ const App = () => {
       setUsername('');
       setPassword('');
     } catch (exception) {
-      setMessage({ message: 'Wrong username or password', classname: 'error' });
+      notificationDispatch({ type: "LOGIN_ERR" })
       setTimeout(() => {
-        setMessage(null);
+        notificationDispatch({ type: "EMPTY" })
       }, 5000);
     }
   };
@@ -66,10 +71,11 @@ const App = () => {
     setUser(null);
     window.localStorage.removeItem('loggedBlogAppUser');
   };
+
   return (
     <div>
       <h1>Blogs App</h1>
-      <Notification message={message} />
+      <Notification notification={notification} />
       {user === null && (
         <LoginForm
           handleLogin={handleLogin}
@@ -84,7 +90,7 @@ const App = () => {
         <Togglable buttonLabel="Create blog" ref={blogFormRef}>
           <BlogForm
             blogs={blogs}
-            setMessage={setMessage}
+            //setMessage={setMessage}
             setBlogs={setBlogs}
             sortBlogs={sortBlogs}
             blogFormRef={blogFormRef}
@@ -94,7 +100,7 @@ const App = () => {
       {user !== null && blogs.length > 0 && (
         <BlogList
           blogs={blogs}
-          setMessage={setMessage}
+          //setMessage={setMessage}
           sortBlogs={sortBlogs}
           user={user}
         />

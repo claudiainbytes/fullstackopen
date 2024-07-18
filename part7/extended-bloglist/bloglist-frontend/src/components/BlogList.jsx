@@ -3,7 +3,8 @@ import BlogLikeButton from './BlogLikeButton';
 import BlogDeleteButton from './BlogDeleteButton';
 import React from 'react';
 
-const BlogList = ({ blogs, setMessage, sortBlogs, user }) => {
+//const BlogList = ({ blogs, setMessage, sortBlogs, user }) => {
+const BlogList = ({ blogs, sortBlogs, user }) => {  
   sortBlogs();
 
   return (
@@ -19,7 +20,7 @@ const BlogList = ({ blogs, setMessage, sortBlogs, user }) => {
                   <br />
                   <BlogDeleteButton
                     blog={blog}
-                    setMessage={setMessage}
+                    //setMessage={setMessage}
                     sortBlogs={sortBlogs}
                   />
                   <br />
@@ -49,7 +50,7 @@ const BlogList = ({ blogs, setMessage, sortBlogs, user }) => {
               <br />
               <BlogLikeButton
                 blog={blog}
-                setMessage={setMessage}
+                //setMessage={setMessage}
                 sortBlogs={sortBlogs}
               />
               <br />
