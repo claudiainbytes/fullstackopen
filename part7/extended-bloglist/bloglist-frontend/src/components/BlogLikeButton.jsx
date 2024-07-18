@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import {
-  useNotificationValue,
   useNotificationDispatch,
 } from './../context/BloglistContext';
 import blogService from './../services/blogs';
 
 const BlogLikeButton = (props) => {
-  const notification = useNotificationValue();
   const notificationDispatch = useNotificationDispatch();
 
   const { blog, sortBlogs } = props;

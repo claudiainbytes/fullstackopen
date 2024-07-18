@@ -1,12 +1,9 @@
 import { useState } from 'react';
-import {
-  useNotificationValue,
-  useNotificationDispatch,
-} from './../context/BloglistContext';
+import { useNotificationDispatch, } from './../context/BloglistContext';
 import blogService from './../services/blogs';
 
 const BlogForm = ({ blogs, setBlogs, sortBlogs, blogFormRef }) => {
-  const notification = useNotificationValue();
+
   const notificationDispatch = useNotificationDispatch();
 
   const [newBlog, setNewBlog] = useState({

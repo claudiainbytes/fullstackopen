@@ -1,11 +1,9 @@
 import blogService from './../services/blogs';
 import {
-  useNotificationValue,
   useNotificationDispatch,
 } from './../context/BloglistContext';
 
 const BlogDeleteButton = (props) => {
-  const notification = useNotificationValue();
   const notificationDispatch = useNotificationDispatch();
 
   const { blog, sortBlogs } = props;

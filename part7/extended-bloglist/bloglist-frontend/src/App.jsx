@@ -13,6 +13,7 @@ import {
 } from './context/BloglistContext';
 
 const App = () => {
+
   const notification = useNotificationValue();
   const notificationDispatch = useNotificationDispatch();
 
@@ -45,17 +46,13 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
     try {
       const user = await loginService.login({
         username,
         password,
       });
-
       window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user));
-
       blogService.setToken(user.token);
-
       setUser(user);
       setUsername('');
       setPassword('');
