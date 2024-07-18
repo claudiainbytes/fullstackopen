@@ -7,15 +7,16 @@ import BlogList from './components/BlogList';
 import Togglable from './components/Togglable';
 import blogService from './services/blogs';
 import loginService from './services/login';
-import { useNotificationValue, useNotificationDispatch } from './context/BloglistContext';
+import {
+  useNotificationValue,
+  useNotificationDispatch,
+} from './context/BloglistContext';
 
 const App = () => {
-
-  const notification = useNotificationValue()
-  const notificationDispatch = useNotificationDispatch()
+  const notification = useNotificationValue();
+  const notificationDispatch = useNotificationDispatch();
 
   const [blogs, setBlogs] = useState([]);
-  //const [message, setMessage] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
@@ -59,9 +60,9 @@ const App = () => {
       setUsername('');
       setPassword('');
     } catch (exception) {
-      notificationDispatch({ type: "LOGIN_ERR" })
+      notificationDispatch({ type: 'LOGIN_ERR' });
       setTimeout(() => {
-        notificationDispatch({ type: "EMPTY" })
+        notificationDispatch({ type: 'EMPTY' });
       }, 5000);
     }
   };
@@ -90,7 +91,6 @@ const App = () => {
         <Togglable buttonLabel="Create blog" ref={blogFormRef}>
           <BlogForm
             blogs={blogs}
-            //setMessage={setMessage}
             setBlogs={setBlogs}
             sortBlogs={sortBlogs}
             blogFormRef={blogFormRef}
@@ -98,12 +98,7 @@ const App = () => {
         </Togglable>
       )}
       {user !== null && blogs.length > 0 && (
-        <BlogList
-          blogs={blogs}
-          //setMessage={setMessage}
-          sortBlogs={sortBlogs}
-          user={user}
-        />
+        <BlogList blogs={blogs} sortBlogs={sortBlogs} user={user} />
       )}
     </div>
   );

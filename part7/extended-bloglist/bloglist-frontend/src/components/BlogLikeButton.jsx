@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { useNotificationValue, useNotificationDispatch } from './../context/BloglistContext'
+import {
+  useNotificationValue,
+  useNotificationDispatch,
+} from './../context/BloglistContext';
 import blogService from './../services/blogs';
 
 const BlogLikeButton = (props) => {
+  const notification = useNotificationValue();
+  const notificationDispatch = useNotificationDispatch();
 
-  const notification = useNotificationValue()
-  const notificationDispatch = useNotificationDispatch()
-
-  //const { blog, setMessage, sortBlogs } = props;
   const { blog, sortBlogs } = props;
 
   const [likes, setLikes] = useState(blog.likes);
@@ -27,14 +28,15 @@ const BlogLikeButton = (props) => {
         sortBlogs();
       })
       .catch((error) => {
-        notificationDispatch({ type: "BLOG_MESSAGE", 
-                             payload: {
-                              message: error.response.data.error,
-                              classname: 'error',
-                             } 
-                          })
+        notificationDispatch({
+          type: 'BLOG_MESSAGE',
+          payload: {
+            message: error.response.data.error,
+            classname: 'error',
+          },
+        });
         setTimeout(() => {
-           notificationDispatch({ type: "EMPTY" })
+          notificationDispatch({ type: 'EMPTY' });
         }, 5000);
       });
   };

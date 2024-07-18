@@ -1,10 +1,12 @@
 import blogService from './../services/blogs';
-import { useNotificationValue, useNotificationDispatch } from './../context/BloglistContext'
+import {
+  useNotificationValue,
+  useNotificationDispatch,
+} from './../context/BloglistContext';
 
 const BlogDeleteButton = (props) => {
-
-  const notification = useNotificationValue()
-  const notificationDispatch = useNotificationDispatch()
+  const notification = useNotificationValue();
+  const notificationDispatch = useNotificationDispatch();
 
   const { blog, sortBlogs } = props;
 
@@ -13,24 +15,26 @@ const BlogDeleteButton = (props) => {
       blogService
         .remove(blog)
         .then((response) => {
-          notificationDispatch({ type: "BLOG_MESSAGE", 
-                             payload: { message: response, classname: 'success' } 
-                          })
+          notificationDispatch({
+            type: 'BLOG_MESSAGE',
+            payload: { message: response, classname: 'success' },
+          });
           sortBlogs();
           setTimeout(() => {
-            notificationDispatch({ type: "EMPTY" })
+            notificationDispatch({ type: 'EMPTY' });
           }, 5000);
         })
         .catch((error) => {
           console.log(error);
-          notificationDispatch({ type: "BLOG_MESSAGE", 
-                             payload: {
-                              message: error.response.data.error,
-                              classname: 'error',
-                             } 
-                          })
+          notificationDispatch({
+            type: 'BLOG_MESSAGE',
+            payload: {
+              message: error.response.data.error,
+              classname: 'error',
+            },
+          });
           setTimeout(() => {
-            notificationDispatch({ type: "EMPTY" })
+            notificationDispatch({ type: 'EMPTY' });
           }, 5000);
         });
     }

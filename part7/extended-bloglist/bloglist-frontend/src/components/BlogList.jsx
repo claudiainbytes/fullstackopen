@@ -3,8 +3,7 @@ import BlogLikeButton from './BlogLikeButton';
 import BlogDeleteButton from './BlogDeleteButton';
 import React from 'react';
 
-//const BlogList = ({ blogs, setMessage, sortBlogs, user }) => {
-const BlogList = ({ blogs, sortBlogs, user }) => {  
+const BlogList = ({ blogs, sortBlogs, user }) => {
   sortBlogs();
 
   return (
@@ -18,11 +17,7 @@ const BlogList = ({ blogs, sortBlogs, user }) => {
                 <>
                   <span className="blog-author">{blog.user.name}</span>
                   <br />
-                  <BlogDeleteButton
-                    blog={blog}
-                    //setMessage={setMessage}
-                    sortBlogs={sortBlogs}
-                  />
+                  <BlogDeleteButton blog={blog} sortBlogs={sortBlogs} />
                   <br />
                 </>
               );
@@ -48,11 +43,7 @@ const BlogList = ({ blogs, sortBlogs, user }) => {
             <div>
               <span className="blog-url">{blog.url}</span>
               <br />
-              <BlogLikeButton
-                blog={blog}
-                //setMessage={setMessage}
-                sortBlogs={sortBlogs}
-              />
+              <BlogLikeButton blog={blog} sortBlogs={sortBlogs} />
               <br />
               {showBlogUserName(user)}
             </div>
