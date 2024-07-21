@@ -1,29 +1,36 @@
 import { createContext, useReducer, useContext } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import notificationReducer from './../reducers/notificationReducer';
+
+const queryClient = new QueryClient();
 
 const BloglistContext = createContext();
 
 export const BloglistContextProvider = (props) => {
+
   const [notification, notificationDispatch] = useReducer(
     notificationReducer,
     {}
   );
 
   return (
-    <BloglistContext.Provider value={[notification, notificationDispatch]}>
-      {props.children}
-    </BloglistContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <BloglistContext.Provider value={[notification, notificationDispatch]}>
+          {props.children}
+        </BloglistContext.Provider>
+      </QueryClientProvider>
   );
+
 };
 
 export const useNotificationValue = () => {
-  const notificationAndDispatch = useContext(BloglistContext);
-  return notificationAndDispatch[0];
+  const stateAndDispatch = useContext(BloglistContext);
+  return stateAndDispatch[0];
 };
 
 export const useNotificationDispatch = () => {
-  const notificationAndDispatch = useContext(BloglistContext);
-  return notificationAndDispatch[1];
+  const stateAndDispatch = useContext(BloglistContext);
+  return stateAndDispatch[1];
 };
 
 export default BloglistContext;

@@ -30,6 +30,14 @@ const update = (id, newObject) => {
   return request.then((response) => response.data);
 };
 
+const updateBlog = blog => {
+  const config = {
+    headers: { Authorization: token },
+  };
+
+  return axios.put(`${baseUrl}/${blog.id}`, blog, config).then(res => res.data)
+};
+
 const remove = (objectToRemove) => {
   const config = {
     headers: { Authorization: token },
@@ -41,4 +49,11 @@ const remove = (objectToRemove) => {
   );
 };
 
-export default { getAll, create, update, remove, setToken };
+const removeBlog = (objectToRemove) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  return axios.delete(`${baseUrl}/${objectToRemove.id}`, config);
+};
+
+export default { getAll, create, update, updateBlog, remove, removeBlog, setToken };

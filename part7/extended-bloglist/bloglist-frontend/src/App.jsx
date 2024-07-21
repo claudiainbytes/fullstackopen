@@ -3,13 +3,14 @@ import Notification from './components/Notification';
 import LoginForm from './components/LoginForm';
 import LogoutForm from './components/LogoutForm';
 import BlogForm from './components/BlogForm';
-import BlogList from './components/BlogList';
+//import BlogList from './components/BlogList';
+import BlogListV2 from './components/BlogListV2';
 import Togglable from './components/Togglable';
 import blogService from './services/blogs';
 import loginService from './services/login';
 import {
   useNotificationValue,
-  useNotificationDispatch,
+  useNotificationDispatch
 } from './context/BloglistContext';
 
 const App = () => {
@@ -17,16 +18,11 @@ const App = () => {
   const notification = useNotificationValue();
   const notificationDispatch = useNotificationDispatch();
 
-  const [blogs, setBlogs] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
 
   const blogFormRef = useRef();
-
-  useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
-  }, [blogs]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser');
@@ -35,10 +31,7 @@ const App = () => {
       setUser(user);
       blogService.setToken(user.token);
     }
-  }, [blogs]);
-
-  const sortBlogs = () =>
-    blogs.sort((blogA, blogB) => blogB.likes - blogA.likes);
+  }, []);
 
   const handleUsername = ({ target }) => setUsername(target.value);
 
@@ -84,7 +77,7 @@ const App = () => {
         />
       )}
       {user !== null && <LogoutForm user={user} handleLogout={handleLogout} />}
-      {user !== null && (
+      {/*user !== null && (
         <Togglable buttonLabel="Create blog" ref={blogFormRef}>
           <BlogForm
             blogs={blogs}
@@ -93,9 +86,9 @@ const App = () => {
             blogFormRef={blogFormRef}
           />
         </Togglable>
-      )}
-      {user !== null && blogs.length > 0 && (
-        <BlogList blogs={blogs} sortBlogs={sortBlogs} user={user} />
+      )*/}
+      {user !== null && (
+        <BlogListV2 user={user} />
       )}
     </div>
   );

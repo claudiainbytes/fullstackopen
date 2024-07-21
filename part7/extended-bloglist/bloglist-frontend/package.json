@@ -16,6 +16,7 @@
     "testEnvironment": "jsdom"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.51.9",
     "axios": "^1.4.0",
     "eslint-plugin-cypress": "^2.15.1",
     "prop-types": "^15.8.1",
@@ -32,6 +33,7 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "cypress": "^13.7.2",
+    "deep-freeze": "^0.0.1",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jest": "^27.9.0",
