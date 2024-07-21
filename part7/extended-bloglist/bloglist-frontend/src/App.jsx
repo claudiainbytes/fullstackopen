@@ -3,8 +3,7 @@ import Notification from './components/Notification';
 import LoginForm from './components/LoginForm';
 import LogoutForm from './components/LogoutForm';
 import BlogForm from './components/BlogForm';
-//import BlogList from './components/BlogList';
-import BlogListV2 from './components/BlogListV2';
+import BlogList from './components/BlogList';
 import Togglable from './components/Togglable';
 import blogService from './services/blogs';
 import loginService from './services/login';
@@ -77,18 +76,13 @@ const App = () => {
         />
       )}
       {user !== null && <LogoutForm user={user} handleLogout={handleLogout} />}
-      {/*user !== null && (
+      { user !== null && (
         <Togglable buttonLabel="Create blog" ref={blogFormRef}>
-          <BlogForm
-            blogs={blogs}
-            setBlogs={setBlogs}
-            sortBlogs={sortBlogs}
-            blogFormRef={blogFormRef}
-          />
+          <BlogForm blogFormRef={blogFormRef}/>
         </Togglable>
-      )*/}
+      )}
       {user !== null && (
-        <BlogListV2 user={user} />
+        <BlogList user={user} />
       )}
     </div>
   );

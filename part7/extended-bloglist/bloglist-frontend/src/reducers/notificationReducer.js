@@ -12,6 +12,11 @@ const notificationReducer = (state = initialState, action) => {
         message: action.payload.message,
         classname: action.payload.classname,
       };
+    case "REJECTED":
+      return {
+        message: `Too short title, must have length 5 or more`,
+        classname: 'error',
+      };
     case 'EMPTY':
       return { message: '', classname: '' };
     default:
