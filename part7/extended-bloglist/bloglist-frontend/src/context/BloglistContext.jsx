@@ -1,6 +1,7 @@
 import { createContext, useReducer, useContext } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import notificationReducer from './../reducers/notificationReducer';
+import authReducer from './../reducers/authReducer';
 
 const queryClient = new QueryClient();
 
@@ -13,9 +14,14 @@ export const BloglistContextProvider = (props) => {
     {}
   );
 
+  const [user, userDispatch] = useReducer(
+    authReducer,
+    null
+  );
+
   return (
       <QueryClientProvider client={queryClient}>
-        <BloglistContext.Provider value={[notification, notificationDispatch]}>
+        <BloglistContext.Provider value={[notification, notificationDispatch, user, userDispatch]}>
           {props.children}
         </BloglistContext.Provider>
       </QueryClientProvider>
@@ -31,6 +37,16 @@ export const useNotificationValue = () => {
 export const useNotificationDispatch = () => {
   const stateAndDispatch = useContext(BloglistContext);
   return stateAndDispatch[1];
+};
+
+export const useUserValue = () => {
+  const stateAndDispatch = useContext(BloglistContext);
+  return stateAndDispatch[2];
+};
+
+export const useUserDispatch = () => {
+  const stateAndDispatch = useContext(BloglistContext);
+  return stateAndDispatch[3];
 };
 
 export default BloglistContext;
