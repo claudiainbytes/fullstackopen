@@ -5,7 +5,7 @@ import Blog from './Blog';
 import BlogLikeButton from './BlogLikeButton';
 import BlogDeleteButton from './BlogDeleteButton';
 
-const BlogListV2 = ({ user }) => {
+const BlogList = ({ user }) => {
  
   const result = useQuery({
     queryKey: ['blogs'],
@@ -70,4 +70,4 @@ const BlogListV2 = ({ user }) => {
   }
 };
 
-export default BlogListV2;
+export default BlogList;

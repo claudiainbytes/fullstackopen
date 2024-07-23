@@ -1,6 +1,6 @@
 import { useUserValue, useUserDispatch } from '../context/BloglistContext';
 
-const LogoutForm2 = () => {
+const LogoutForm = () => {
   
   const user = useUserValue();
   const userDispatch = useUserDispatch();
@@ -22,4 +22,4 @@ const LogoutForm2 = () => {
     </div>
 )}
 
-export default LogoutForm2;
+export default LogoutForm;

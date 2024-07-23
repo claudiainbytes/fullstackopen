@@ -4,9 +4,10 @@ import loginService from '../services/login';
 import { useNotificationDispatch } from '../context/BloglistContext';
 import { useUserDispatch } from '../context/BloglistContext';
 
-const LoginForm2 = () => {
+const LoginForm = () => {
 
   const notificationDispatch = useNotificationDispatch();
+
   const userDispatch = useUserDispatch();
 
   const [username, setUsername] = useState('');
@@ -74,4 +75,4 @@ const LoginForm2 = () => {
   );
 };
 
-export default LoginForm2;
+export default LoginForm;
