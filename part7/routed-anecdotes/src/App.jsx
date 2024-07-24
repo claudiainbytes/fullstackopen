@@ -67,7 +67,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <Router>
       <h1>Software anecdotes</h1>
       <Menu />
       { notification.message.length > 0
@@ -81,7 +81,7 @@ const App = () => {
         <Route path="/create" element={ <CreateNew addNew={addNew} />} />
       </Routes>
       <Footer />
-    </div>
+    </Router>
   )
 }
 
