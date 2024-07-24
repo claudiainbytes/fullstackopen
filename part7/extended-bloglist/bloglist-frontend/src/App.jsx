@@ -11,6 +11,7 @@ import BlogList from './components/BlogList';
 import Togglable from './components/Togglable';
 import Users from './components/Users';
 import User from './components/User';
+import BlogV2 from './components/BlogV2';
 import Page404 from './components/Page404';
 import { useNotificationValue } from './context/BloglistContext';
 import { useUserValue } from './context/BloglistContext';
@@ -51,6 +52,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<BlogList user={user} />} />
             <Route path="/blogs" element={<BlogList user={user} />} />
+            <Route path="/blogs/:id" element={ <BlogV2/>} />
             <Route path="/users" element={<Users />} />
             <Route path="/users/:id" element={ <User/>} />
             <Route path="/error-404" element={ <Page404/>} />

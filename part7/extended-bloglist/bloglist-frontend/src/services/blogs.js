@@ -64,4 +64,10 @@ const removeBlog = (objectToRemove) => {
   return axios.delete(`${baseUrl}/${objectToRemove.id}`, config);
 };
 
-export default { getAll, create, createBlog, update, updateBlog, remove, removeBlog, setToken };
+const getBlog = ({queryKey}) => {
+  const [_key, { id }] = queryKey;
+  const request = axios.get(`${baseUrl}/${id}`);
+  return request.then((response) => response.data ).catch(error => error.response);
+};
+
+export default { getAll, create, createBlog, update, updateBlog, remove, removeBlog, setToken, getBlog };
