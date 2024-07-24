@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState, useRef} from 'react';
 import {
   BrowserRouter as Router,
   Routes, Route, Link
@@ -10,8 +10,11 @@ import BlogForm from './components/BlogForm';
 import BlogList from './components/BlogList';
 import Togglable from './components/Togglable';
 import Users from './components/Users';
+import User from './components/User';
+import Page404 from './components/Page404';
 import { useNotificationValue } from './context/BloglistContext';
 import { useUserValue } from './context/BloglistContext';
+
 
 const App = () => {
 
@@ -47,7 +50,10 @@ const App = () => {
         {user !== null && (
           <Routes>
             <Route path="/" element={<BlogList user={user} />} />
+            <Route path="/blogs" element={<BlogList user={user} />} />
             <Route path="/users" element={<Users />} />
+            <Route path="/users/:id" element={ <User/>} />
+            <Route path="/error-404" element={ <Page404/>} />
           </Routes>
         )}
       </div>

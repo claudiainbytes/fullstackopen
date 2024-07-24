@@ -12,5 +12,10 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
+const getUser = ({queryKey}) => {
+  const [_key, { id }] = queryKey;
+  const request = axios.get(`${baseUrl}/${id}`);
+  return request.then((response) => response.data ).catch(error => error.response);
+};
 
-export default { getAll, setToken };
+export default { getAll, setToken, getUser };
