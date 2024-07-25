@@ -3,8 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNotificationDispatch } from './../context/BloglistContext';
 
 const BlogDeleteButton = (props) => {
-
-  const queryClient =  useQueryClient() 
+  const queryClient = useQueryClient();
 
   const notificationDispatch = useNotificationDispatch();
 
@@ -13,23 +12,23 @@ const BlogDeleteButton = (props) => {
   const deleteBlogMutation = useMutation({
     mutationFn: blogService.removeBlog,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['blogs'] })
+      queryClient.invalidateQueries({ queryKey: ['blogs'] });
     },
-  })
+  });
 
   const handleBlogDelete = (event) => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
-        deleteBlogMutation.mutate(blog)
-        notificationDispatch({
-          type: 'BLOG_MESSAGE',
-          payload: {
-            message: `The blog ${blog.title} by ${blog.author} has been removed`,
-            classname: 'success',
-          },
-        })
-        setTimeout(() => {
-          notificationDispatch({ type: 'EMPTY' });
-        }, 1000);
+      deleteBlogMutation.mutate(blog);
+      notificationDispatch({
+        type: 'BLOG_MESSAGE',
+        payload: {
+          message: `The blog ${blog.title} by ${blog.author} has been removed`,
+          classname: 'success',
+        },
+      });
+      setTimeout(() => {
+        notificationDispatch({ type: 'EMPTY' });
+      }, 1000);
     }
   };
 

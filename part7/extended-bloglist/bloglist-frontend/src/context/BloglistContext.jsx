@@ -8,25 +8,22 @@ const queryClient = new QueryClient();
 const BloglistContext = createContext();
 
 export const BloglistContextProvider = (props) => {
-
   const [notification, notificationDispatch] = useReducer(
     notificationReducer,
     {}
   );
 
-  const [user, userDispatch] = useReducer(
-    authReducer,
-    null
-  );
+  const [user, userDispatch] = useReducer(authReducer, null);
 
   return (
-      <QueryClientProvider client={queryClient}>
-        <BloglistContext.Provider value={[notification, notificationDispatch, user, userDispatch]}>
-          {props.children}
-        </BloglistContext.Provider>
-      </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <BloglistContext.Provider
+        value={[notification, notificationDispatch, user, userDispatch]}
+      >
+        {props.children}
+      </BloglistContext.Provider>
+    </QueryClientProvider>
   );
-
 };
 
 export const useNotificationValue = () => {

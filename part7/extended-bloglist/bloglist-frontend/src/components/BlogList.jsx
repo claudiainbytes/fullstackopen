@@ -6,20 +6,20 @@ import BlogLikeButton from './BlogLikeButton';
 import BlogDeleteButton from './BlogDeleteButton';
 
 const BlogList = ({ user }) => {
- 
   const result = useQuery({
     queryKey: ['blogs'],
     queryFn: blogService.getAll,
-    refetchOnWindowFocus: false
-  })
+    refetchOnWindowFocus: false,
+  });
 
-  if ( result.isLoading ) {
-    return <div>loading data...</div>
+  if (result.isLoading) {
+    return <div>loading data...</div>;
   } else {
+    const blogs = result.data;
 
-    const blogs = result.data
-    
-    const assortedblogs = blogs.sort((blogA, blogB) => blogB.likes - blogA.likes)
+    const assortedblogs = blogs.sort(
+      (blogA, blogB) => blogB.likes - blogA.likes
+    );
 
     return (
       <div>
@@ -32,7 +32,7 @@ const BlogList = ({ user }) => {
                   <>
                     <span className="blog-author">{blog.user.name}</span>
                     <br />
-                    <BlogDeleteButton blog={blog}/>
+                    <BlogDeleteButton blog={blog} />
                     <br />
                   </>
                 );
@@ -66,7 +66,7 @@ const BlogList = ({ user }) => {
           );
         })}
       </div>
-    )
+    );
   }
 };
 

@@ -4,26 +4,25 @@ import { useNotificationDispatch } from './../context/BloglistContext';
 import blogService from './../services/blogs';
 
 const BlogForm = ({ blogFormRef }) => {
-
-  const queryClient =  useQueryClient()
+  const queryClient = useQueryClient();
 
   const notificationDispatch = useNotificationDispatch();
 
-  const blogs = queryClient.getQueryData(['blogs'])
+  const blogs = queryClient.getQueryData(['blogs']);
 
-  const createBlogMutation = useMutation({ 
+  const createBlogMutation = useMutation({
     mutationFn: blogService.createBlog,
     onSuccess: (newBlog) => {
-      const blogs = queryClient.getQueryData(['blogs'])
-      queryClient.setQueryData(['blogs'], blogs.concat(newBlog))
+      const blogs = queryClient.getQueryData(['blogs']);
+      queryClient.setQueryData(['blogs'], blogs.concat(newBlog));
     },
     onError: (error, variables, context) => {
       notificationDispatch({ type: 'REJECTED' });
       setTimeout(() => {
         notificationDispatch({ type: 'EMPTY' });
-      }, 5000)
-    }
-})
+      }, 5000);
+    },
+  });
 
   const [newBlog, setNewBlog] = useState({
     title: '',
@@ -66,17 +65,17 @@ const BlogForm = ({ blogFormRef }) => {
       }, 5000);
       setNewBlog({ title: '', author: '', url: '', likes: 0 });
     } else {
-        createBlogMutation.mutate(newBlog)
-        notificationDispatch({
-          type: 'BLOG_MESSAGE',
-          payload: {
-            message: `A new blog  ${newBlog.title} by ${newBlog.author} added`,
-            classname: 'success',
-          },
-        })
-        setTimeout(() => {
-          notificationDispatch({ type: 'EMPTY' });
-        }, 1000);
+      createBlogMutation.mutate(newBlog);
+      notificationDispatch({
+        type: 'BLOG_MESSAGE',
+        payload: {
+          message: `A new blog  ${newBlog.title} by ${newBlog.author} added`,
+          classname: 'success',
+        },
+      });
+      setTimeout(() => {
+        notificationDispatch({ type: 'EMPTY' });
+      }, 1000);
     }
   };
 

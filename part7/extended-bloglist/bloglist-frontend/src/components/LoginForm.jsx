@@ -5,7 +5,6 @@ import { useNotificationDispatch } from '../context/BloglistContext';
 import { useUserDispatch } from '../context/BloglistContext';
 
 const LoginForm = () => {
-
   const notificationDispatch = useNotificationDispatch();
 
   const userDispatch = useUserDispatch();
