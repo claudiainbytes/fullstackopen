@@ -27,19 +27,15 @@ const App = () => {
     <Router>
       {user !== null && (
         <div>
-          <Link style={padding} to="/">
-            home
-          </Link>
-          <Link style={padding} to="/users">
-            users
-          </Link>
+          <Link style={padding} to="/">blogs</Link>
+          <Link style={padding} to="/users">users</Link>
+          <LogoutForm />
         </div>
       )}
       <div>
         <h1>Blogs App</h1>
         <Notification notification={notification} />
         {user === null && <LoginForm />}
-        {user !== null && <LogoutForm />}
         {user !== null && (
           <Togglable buttonLabel="Create blog" ref={blogFormRef}>
             <BlogForm blogFormRef={blogFormRef} />
