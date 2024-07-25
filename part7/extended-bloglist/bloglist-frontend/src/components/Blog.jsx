@@ -1,17 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const Blog = (props) => {
-  const blog = props.blog;
-
-  const [visible, setVisible] = useState(false);
-
-  const hideWhenVisible = { display: visible ? 'none' : '' };
-  const showWhenVisible = { display: visible ? '' : 'none' };
-
-  const toggleVisibility = () => {
-    setVisible(!visible);
-  };
-
+const Blog = ({ blog }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -22,17 +12,9 @@ const Blog = (props) => {
 
   return (
     <div className="blog-container" style={blogStyle}>
-      <div className="blog-container-toggle" style={hideWhenVisible}>
-        <span className="blog-title">{blog.title}</span>&nbsp;
-        <button onClick={toggleVisibility}>View</button>
-      </div>
-      <div className="blog-container-toggle" style={showWhenVisible}>
-        <span className="blog-title">{blog.title}</span>&nbsp;
-        <button onClick={toggleVisibility}>Hide</button>
-        {props.children}
-      </div>
+      <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
     </div>
   );
-};
+}
 
 export default Blog;

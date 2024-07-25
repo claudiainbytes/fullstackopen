@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import blogService from '../services/blogs';
 import BlogLikeButton from './BlogLikeButton';
 
-const BlogV2 = () => {
+const BlogDetails = () => {
   const id = useParams().id;
 
   const result = useQuery({
@@ -37,4 +37,4 @@ const BlogV2 = () => {
   }
 };
 
-export default BlogV2;
+export default BlogDetails;
