@@ -9,6 +9,13 @@ Exercises
 - [bloglist-frontend](/part7/extended-bloglist/bloglist-frontend)
 - [blogs-backend](/part7/extended-bloglist/blogs-backend)
 
+Config .env file
+
+MONGODB_URI=
+TEST_MONGODB_URI=
+PORT=3003
+SECRET=
+
 Execute for testing with Cypress
 
 - Run front

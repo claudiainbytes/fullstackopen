@@ -90,8 +90,8 @@ blogsRouter.put('/:id', async (request, response) => {
 
     const user = request.user
 
-    const { title, author, url, likes } = request.body
-    const blog = { title, author, url, likes }
+    const { title, author, url, likes, comments } = request.body
+    const blog = { title, author, url, likes, comments }
     const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true, runValidators: true, context: 'query' })
     response.json(updatedBlog)    
 })
