@@ -15,6 +15,6 @@ const Blog = ({ blog }) => {
       <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
     </div>
   );
-}
+};
 
 export default Blog;

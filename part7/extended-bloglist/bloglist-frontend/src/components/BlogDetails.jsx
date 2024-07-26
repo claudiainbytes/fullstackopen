@@ -2,6 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import blogService from '../services/blogs';
 import BlogLikeButton from './BlogLikeButton';
+import Comments from './Comments';
 
 const BlogDetails = () => {
   const id = useParams().id;
@@ -30,6 +31,9 @@ const BlogDetails = () => {
               {blog.likes} <BlogLikeButton blog={blog} />
             </div>
             <div>added by {blog.author}</div>
+          </div>
+          <div>
+            <Comments blog={blog} />
           </div>
         </>
       );
