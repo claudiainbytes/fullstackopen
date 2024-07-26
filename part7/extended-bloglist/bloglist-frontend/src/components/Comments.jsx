@@ -2,18 +2,25 @@ import { useState } from 'react';
 import CommentForm from './CommentForm';
 
 const Comments = ({ blog }) => {
-
   const comments = blog['comments'];
 
   return (
     <>
-      <h3>comments</h3>
       <CommentForm blog={blog} />
-      <ul>
-        {comments.map((comment, k) => (
-          <li key={k}>{comment}</li>
-        ))}
-      </ul>
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          {comments.map((comment, k) => (
+            <tr className="table-default" key={k}>
+              <td>{comment}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };

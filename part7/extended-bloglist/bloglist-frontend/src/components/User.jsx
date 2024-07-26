@@ -20,15 +20,23 @@ const User = () => {
     } else {
       const user = result.data;
       return (
-        <div>
-          <h2>{user.name}</h2>
-          <h3>added blogs</h3>
-          <ul>
-            {user.blogs.map((blog) => (
-              <li key={blog.id}>{blog.title}</li>
-            ))}
-          </ul>
-        </div>
+        <>
+          <h2 className="pb-2 text-secondary-emphasis">{user.name}</h2>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>added blogs</th>
+              </tr>
+            </thead>
+            <tbody>
+              {user.blogs.map((blog) => (
+                <tr className="table-default" key={blog.id}>
+                  <td>{blog.title}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       );
     }
   }

@@ -80,40 +80,55 @@ const BlogForm = ({ blogFormRef }) => {
   };
 
   return (
-    <form onSubmit={handleAddBlog}>
-      <div>
+    <form className="p-0" onSubmit={handleAddBlog}>
+      <div className="row py-1">
         <label htmlFor="title">Title &nbsp;</label>
-        <input
-          type="text"
-          value={title}
-          name="title"
-          id="title"
-          onChange={handleBlogTitle}
-        />
+        <div className="col-12">
+          <input
+            className="form-control"
+            type="text"
+            value={title}
+            name="title"
+            id="title"
+            onChange={handleBlogTitle}
+          />
+        </div>
       </div>
-      <div>
+      <div className="row py-1">
         <label htmlFor="author">Author &nbsp;</label>
-        <input
-          type="text"
-          value={author}
-          name="author"
-          id="author"
-          onChange={handleBlogAuthor}
-        />
+        <div className="col-12">
+          <input
+            className="form-control"
+            type="text"
+            value={author}
+            name="author"
+            id="author"
+            onChange={handleBlogAuthor}
+          />
+        </div>
       </div>
-      <div>
+      <div className="row py-1">
         <label htmlFor="url">URL &nbsp;</label>
-        <input
-          type="text"
-          value={url}
-          name="url"
-          id="url"
-          onChange={handleBlogURL}
-        />
+        <div className="col-12">
+          <input
+            className="form-control"
+            type="text"
+            value={url}
+            name="url"
+            id="url"
+            onChange={handleBlogURL}
+          />
+        </div>
       </div>
-      <button type="submit" id="create-blog-button">
-        Create
-      </button>
+      <div className="py-2">
+        <button
+          className="btn btn-primary"
+          type="submit"
+          id="create-blog-button"
+        >
+          Create
+        </button>
+      </div>
     </form>
   );
 };

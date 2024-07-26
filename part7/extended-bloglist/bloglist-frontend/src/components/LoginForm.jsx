@@ -46,30 +46,38 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <div>
+    <form className="p-0" onSubmit={handleLogin}>
+      <div className="row py-1">
         <label htmlFor="username">Username &nbsp;</label>
-        <input
-          type="text"
-          value={username}
-          name="username"
-          id="username"
-          onChange={handleUsername}
-        />
+        <div className="col-sm-5">
+          <input
+            className="form-control"
+            type="text"
+            value={username}
+            name="username"
+            id="username"
+            onChange={handleUsername}
+          />
+        </div>
       </div>
-      <div>
+      <div className="row py-1">
         <label htmlFor="password">Password &nbsp;</label>
-        <input
-          type="password"
-          value={password}
-          name="password"
-          id="password"
-          onChange={handlePassword}
-        />
+        <div className="col-sm-5">
+          <input
+            className="form-control"
+            type="password"
+            value={password}
+            name="password"
+            id="password"
+            onChange={handlePassword}
+          />
+        </div>
       </div>
-      <button type="submit" id="login-button">
-        Login
-      </button>
+      <div className="py-2">
+        <button className="btn btn-primary" type="submit" id="login-button">
+          Login
+        </button>
+      </div>
     </form>
   );
 };

@@ -11,9 +11,11 @@ const Blog = ({ blog }) => {
   };
 
   return (
-    <div className="blog-container" style={blogStyle}>
-      <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
-    </div>
+    <tr className="table-default">
+      <td>
+        <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+      </td>
+    </tr>
   );
 };
 

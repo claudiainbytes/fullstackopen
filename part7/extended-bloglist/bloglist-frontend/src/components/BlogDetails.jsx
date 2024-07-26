@@ -22,15 +22,15 @@ const BlogDetails = () => {
       const blog = result.data;
       return (
         <>
-          <h2>{blog.title}</h2>
-          <div>
+          <h2 className="pb-2 text-secondary-emphasis">{blog.title}</h2>
+          <div className="py-3">
             <div>
               <a href="#">{blog.url}</a>
             </div>
             <div>
               {blog.likes} <BlogLikeButton blog={blog} />
             </div>
-            <div>added by {blog.author}</div>
+            <div><strong>added by {blog.author}</strong></div>
           </div>
           <div>
             <Comments blog={blog} />

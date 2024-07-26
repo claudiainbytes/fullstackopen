@@ -7,8 +7,7 @@ import BlogLikeButton from './BlogLikeButton';
 import BlogDeleteButton from './BlogDeleteButton';
 import Togglable from './Togglable';
 
-const BlogList = ({ user }) => {
-
+const BlogList = () => {
   const result = useQuery({
     queryKey: ['blogs'],
     queryFn: blogService.getAll,
@@ -27,15 +26,25 @@ const BlogList = ({ user }) => {
     );
 
     return (
-      <div>
+      <>
         <Togglable buttonLabel="Create blog" ref={blogFormRef}>
-            <BlogForm blogFormRef={blogFormRef} />
+          <BlogForm blogFormRef={blogFormRef} />
         </Togglable>
-        <h2>Blogs</h2>
-        {assortedblogs.map((blog) => {
-          return <Blog key={blog.id} blog={blog} />;
-        })}
-      </div>
+        <hr className="hr" />
+        <h2 className="pb-2 text-secondary-emphasis">Blogs</h2>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+            </tr>
+          </thead>
+          <tbody>
+            {assortedblogs.map((blog) => (
+              <Blog key={blog.id} blog={blog} />
+            ))}
+          </tbody>
+        </table>
+      </>
     );
   }
 };

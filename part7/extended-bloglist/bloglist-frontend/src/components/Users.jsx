@@ -17,25 +17,29 @@ const Users = ({}) => {
     const assortedusers = users.sort((A, B) => B.blogs.length - A.blogs.length);
 
     return (
-      <div>
-        <h2>Users</h2>
-        <div className="table">
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell">
-              <strong>blogs created</strong>
-            </div>
-          </div>
-          {assortedusers.map((user) => (
-            <div className="row" key={user.id}>
-              <div className="cell">
-                <Link to={`/users/${user.id}`}>{user.name}</Link>
-              </div>
-              <div className="cell">{user.blogs.length}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <>
+        <h2 className="pb-2 text-secondary-emphasis">Users</h2>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>blogs created</th>
+            </tr>
+          </thead>
+          <tbody>
+            {assortedusers.map((user) => (
+              <tr className="table-default" key={user.id}>
+                <td>
+                  <Link to={`/users/${user.id}`}>{user.name}</Link>
+                </td>
+                <td>
+                  <div className="cell">{user.blogs.length}</div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
     );
   }
 };

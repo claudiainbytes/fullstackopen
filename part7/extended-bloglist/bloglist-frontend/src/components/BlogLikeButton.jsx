@@ -42,7 +42,7 @@ const BlogLikeButton = (props) => {
   return (
     <>
       <span className="blog-likes">Likes: {likes}</span>
-      <button className="blog-like-button" onClick={handleAddLike}>
+      <button className="btn btn-primary btn-sm mx-2" onClick={handleAddLike}>
         Like
       </button>
     </>

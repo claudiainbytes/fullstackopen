@@ -22,31 +22,61 @@ const App = () => {
   return (
     <Router>
       {user !== null && (
-        <div>
-          <Link style={padding} to="/">
-            blogs
-          </Link>
-          <Link style={padding} to="/users">
-            users
-          </Link>
-          <LogoutForm />
-        </div>
+        <nav className="navbar navbar-expand-lg bg-primary">
+          <div className="container">
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/">
+                    blogs
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/users">
+                    users
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <LogoutForm />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
       )}
-      <div>
-        <h1>Blogs App</h1>
-        <Notification notification={notification} />
-        {user === null && <LoginForm />}
-        {user !== null && (
-          <Routes>
-            <Route path="/" element={<BlogList user={user} />} />
-            <Route path="/blogs" element={<BlogList user={user} />} />
-            <Route path="/blogs/:id" element={<BlogDetails />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/users/:id" element={<User />} />
-            <Route path="/error-404" element={<Page404 />} />
-          </Routes>
-        )}
-      </div>
+      <main className="container">
+        <div className="row">
+          <div className="col-12">
+            <h1 className="py-2 text-primary-emphasis">Blogs App</h1>
+            <Notification notification={notification} />
+            {user === null && <LoginForm />}
+            {user !== null && (
+              <Routes>
+                <Route path="/" element={<BlogList />} />
+                <Route path="/blogs" element={<BlogList />} />
+                <Route path="/blogs/:id" element={<BlogDetails />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/users/:id" element={<User />} />
+                <Route path="/error-404" element={<Page404 />} />
+              </Routes>
+            )}
+          </div>
+        </div>
+      </main>
     </Router>
   );
 };

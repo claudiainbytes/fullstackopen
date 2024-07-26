@@ -44,22 +44,29 @@ const CommentForm = ({ blog }) => {
     setTimeout(() => {
       setComment('');
       notificationDispatch({ type: 'EMPTY' });
-    }, 5000);
+    }, 1000);
   };
 
   return (
-    <form onSubmit={handleAddComment}>
-      <div>
-        <input
-          type="text"
-          value={comment}
-          name="comment"
-          id="comment"
-          onChange={handleComment}
-        />
+    <form className="mb-3" onSubmit={handleAddComment}>
+      <div className="row py-1">
+        <div className="col-sm-5">
+          <input
+            className="form-control"
+            type="text"
+            value={comment}
+            name="comment"
+            id="comment"
+            onChange={handleComment}
+          />
+        </div>
       </div>
-      <button type="submit" id="create-comment-button">
-        Create
+      <button
+        className="btn btn-primary my-1"
+        type="submit"
+        id="create-comment-button"
+      >
+        Add Comment
       </button>
     </form>
   );

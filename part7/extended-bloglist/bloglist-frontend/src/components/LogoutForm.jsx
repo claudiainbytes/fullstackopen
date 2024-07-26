@@ -11,14 +11,18 @@ const LogoutForm = () => {
   };
 
   return (
-    <div>
-      <p>
-        Welcome {user.name}&nbsp;
-        <button type="button" onClick={handleLogout}>
+    <>
+      <div className="nav-item d-flex" role="logout">
+        <div className="nav-link">Welcome {user.name}&nbsp;</div>
+        <button
+          className="btn btn-secondary my-2 my-sm-0"
+          type="button"
+          onClick={handleLogout}
+        >
           Logout
         </button>
-      </p>
-    </div>
+      </div>
+    </>
   );
 };
 
