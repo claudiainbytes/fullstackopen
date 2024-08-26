@@ -1,6 +1,6 @@
 interface ExerciseCalculatorValues {
-    target: number;
-    hoursPerDay: number[];
+    target: number | undefined;
+    hoursPerDay: number[] | undefined;
 }
 
 interface Result { 
@@ -57,7 +57,7 @@ const calculateExercises = (target: number, hoursPerDay: number[] ): Result => {
     const rate: number =  Math.ceil(( average / target ) * 100);
 
     let rating: number = 0;
-    let ratingDescription: string = null;
+    let ratingDescription: string = "";
 
     if( rate >= 0 && rate < 33 ){
       rating = 1;

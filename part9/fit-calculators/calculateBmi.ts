@@ -37,7 +37,9 @@ const calculateBmi = (heightCm: number, weightKg: number, details: string): Mess
         return `${details} Your IMC is ${imc.toFixed(2)}. Obesity.`;
     } else if ( Number.isNaN(imc)) {
       return `${details} Your have to specify the height and/or weight.`;
-    } 
+    } else {
+      return ``
+    }
 }
 
 try {
