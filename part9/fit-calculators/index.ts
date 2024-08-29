@@ -1,8 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import express from 'express';
+import cors from 'cors';
 import { Request, Response, NextFunction } from 'express';
 import { calcBmi } from './modules/webBmi';
+import { isNotArrayOfNumbers, calculateExercises } from './modules/webCalculator';
 
 const app = express();
+ 
+app.use(cors());
+app.use(express.json());
 
 app.get('/hello', (_req, res) => {
   res.send('Hello Full Stack!');
@@ -19,6 +26,24 @@ app.get('/bmi', (_req: Request, res: Response, next: NextFunction) => {
     } catch (error: unknown) {
         next(error);
     }
+});
+
+ 
+app.post('/exercises', (_req: Request, res: Response, next: NextFunction)  => {
+    console.log("req body", _req.body);
+    try {
+      if ((!_req.body.daily_exercises) || (!_req.body.target) || isNotArrayOfNumbers(_req.body.daily_exercises)) {
+        throw new Error('malformatted parameters');
+      } 
+      console.log("typeof target:", typeof _req.body.target, "daily exerc", typeof _req.body.daily_exercises);
+      const target:number = Number(_req.body.target);
+      const daily_exercises:number[] = _req.body.daily_exercises;
+
+      res.send(calculateExercises(target, daily_exercises));
+    } catch (error: unknown) {
+        next(error);
+    }
+
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
