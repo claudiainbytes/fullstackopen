@@ -1,6 +1,6 @@
-import express from 'express'
-import { Request, Response, NextFunction } from 'express'
-import { calcBmi } from './modules/webBmi'
+import express from 'express';
+import { Request, Response, NextFunction } from 'express';
+import { calcBmi } from './modules/webBmi';
 
 const app = express();
 
@@ -21,6 +21,7 @@ app.get('/bmi', (_req: Request, res: Response, next: NextFunction) => {
     }
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, _req: Request, res: Response, next: NextFunction): void => {
     console.error(err.message);
 

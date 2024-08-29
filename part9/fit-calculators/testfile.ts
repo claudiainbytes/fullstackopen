@@ -1,2 +1,2 @@
-let greetings: string = 'Hello World!'
-console.log(greetings)
+const greetings: string = 'Hello World!';
+console.log(greetings);

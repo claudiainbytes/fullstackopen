@@ -2,7 +2,7 @@ interface BmiValues {
     weight: number;
     height: number;
     bmi: string;
-  }
+}
   
   const calcBmi = (weight: number, height: number): BmiValues => {
 
@@ -25,15 +25,15 @@ interface BmiValues {
     } else if ( Number.isNaN(imc)) {
       message = `Your have to specify the height and/or weight.`;
     } else {
-      message = ``
+      message = ``;
     }
 
     return {
       weight,
       height,
       bmi: message
-    }
+    };
 
-  }
+  };
   
   export { calcBmi };

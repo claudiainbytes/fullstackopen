@@ -11,13 +11,13 @@ const parseArguments = (args: string[]): IMCValues => {
       return {
         height: Number(args[2]),
         weight: Number(args[3])
-      }
+      };
     } else {
       throw new Error('Provided values were not numbers!');
     }
-  }
+  };
 
-type Message = string
+type Message = string;
 
 const calculateBmi = (heightCm: number, weightKg: number, details: string): Message => {
     
@@ -38,15 +38,15 @@ const calculateBmi = (heightCm: number, weightKg: number, details: string): Mess
     } else if ( Number.isNaN(imc)) {
       return `${details} Your have to specify the height and/or weight.`;
     } else {
-      return ``
+      return ``;
     }
-}
+};
 
 try {
     const { height, weight } = parseArguments(process.argv);
     console.log(calculateBmi(height, weight, `Given ${height}cms and ${weight}kgs, the result is:`));
 } catch (error: unknown) {
-    let errorMessage = 'Something bad happened.'
+    let errorMessage = 'Something bad happened.';
     if (error instanceof Error) {
       errorMessage += ' Error: ' + error.message;
     }

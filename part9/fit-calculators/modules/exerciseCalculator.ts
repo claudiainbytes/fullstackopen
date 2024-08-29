@@ -16,11 +16,12 @@ interface Result {
 const parseArgs = (args: string[]): ExerciseCalculatorValues => {
     if (args.length < 3) throw new Error('Not enough arguments');
     
-    let [,, ...argValues] = args
+    const [,, ...argValues] = args;
 
-    let countNaN: number = 0
+    let countNaN: number = 0;
 
-    let newArgValues = argValues.map((v:string) => { if(isNaN(Number(v))) { countNaN++ } else { countNaN; return Number(v); }} )
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    const newArgValues = argValues.map((v:string) => { if(isNaN(Number(v))) { countNaN++; } else { countNaN; return Number(v); }} );
 
     if(countNaN > 0) {
       throw new Error('Provided values were not a number!');
@@ -28,10 +29,10 @@ const parseArgs = (args: string[]): ExerciseCalculatorValues => {
       return {
         "target": newArgValues[0],
         "hoursPerDay": newArgValues.slice(1, newArgValues.length )
-      }
+      };
     }
 
-}
+};
 
 const getTotalHours = (hoursPerDay: number[] ): number => {
 
@@ -42,11 +43,11 @@ const getTotalHours = (hoursPerDay: number[] ): number => {
     initialValue,
   );
 
-}
+};
 
 const getTrainingDays = (hoursPerDay: number[] ): number[] => {
   return hoursPerDay.filter((item: number) => item > 0);
-}
+};
 
 const calculateExercises = (target: number, hoursPerDay: number[] ): Result => {
 
@@ -78,16 +79,17 @@ const calculateExercises = (target: number, hoursPerDay: number[] ): Result => {
         ratingDescription,
         target,
         average
-      }
+      };
 
     return result; 
-}
+};
 
 try {
     const { target, hoursPerDay } = parseArgs(process.argv);
     console.log(calculateExercises(target, hoursPerDay));
 } catch (error: unknown) {
-    let errorMessage = 'Something bad happened.'
+    let errorMessage = 'Something bad happened.';
+     
     if (error instanceof Error) {
       errorMessage += ' Error: ' + error.message;
     }
