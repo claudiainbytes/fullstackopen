@@ -1,6 +1,6 @@
 import patientsData from '../data/patients';
 
-import { NonSensitivePatientEntry, PatientEntry , NewPatientEntry } from '../types';
+import { NonSensitivePatientEntry, PatientEntry, NewPatientEntry } from '../types';
 
 import toNewPatientEntry from '../utils';
 
