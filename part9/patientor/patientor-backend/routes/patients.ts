@@ -2,7 +2,9 @@ import express from 'express';
 
 import patientService from '../services/patientService';
 
-//import toNewDiagnoseEntry from '../utils';
+import toNewPatientEntry from '../utils';
+
+import { v1 as uuid } from 'uuid';
 
 const router = express.Router();
 
@@ -10,22 +12,11 @@ router.get('/', (_req, res) => {
   res.send(patientService.getNonSensitiveEntries());
 });
 
-/*
-router.get('/:id', (req, res) => {
-  const diary = diaryService.findById(Number(req.params.id));
-
-  if (diary) {
-    res.send(diary);
-  } else {
-    res.sendStatus(404);
-  }
-});
-
 router.post('/', (req, res) => {
   try {
-    const newDiaryEntry = toNewDiaryEntry(req.body);
-    const addedEntry = diaryService.addDiary(newDiaryEntry);
-    res.json(addedEntry);
+    const newPatientEntry = toNewPatientEntry(req.body);
+    const addedPatient = patientService.addPatient(newPatientEntry, uuid());
+    res.json(addedPatient);
   } catch (error: unknown) {
     let errorMessage = 'Something went wrong.';
     if (error instanceof Error) {
@@ -34,5 +25,5 @@ router.post('/', (req, res) => {
     res.status(400).send(errorMessage);
   }
 });
-*/
+
 export default router;

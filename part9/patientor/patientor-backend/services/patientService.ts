@@ -1,11 +1,15 @@
 import patientsData from '../data/patients';
 
-import { NonSensitivePatientEntry, PatientEntry
-//    , NewPatientEntry 
-} from '../types';
+import { NonSensitivePatientEntry, PatientEntry , NewPatientEntry } from '../types';
 
-const patients: PatientEntry[] = patientsData;
+import toNewPatientEntry from '../utils';
 
+const patients: PatientEntry [] = patientsData.map(obj => {
+  const object = toNewPatientEntry(obj) as PatientEntry;
+  object.id = obj.id;
+  return object;
+});
+  
 const getEntries = (): PatientEntry[] => {
   return patients;
 };
@@ -19,26 +23,19 @@ const getNonSensitiveEntries = (): NonSensitivePatientEntry[] => {
     occupation
   }));
 };
-/*
-const findById = (id: number): DiaryEntry | undefined => {
-  const entry = diaries.find(d => d.id === id);
-  return entry;
-};
 
-const addDiary = ( entry: NewDiaryEntry ): DiaryEntry => {
-  const newDiaryEntry = {
-    id: Math.max(...diaries.map(d => d.id)) + 1,
-    ...entry
+const addPatient = ( patient: NewPatientEntry, uuid: string ): PatientEntry => {
+  const newPatientEntry = {
+    id: uuid,
+    ...patient
   };
 
-  diaries.push(newDiaryEntry);
-  return newDiaryEntry;
+  patients.push(newPatientEntry);
+  return newPatientEntry;
 };
-*/
 
 export default {
   getEntries,
-  //addDiary,
-  getNonSensitiveEntries,
-  //findById
+  addPatient,
+  getNonSensitiveEntries
 };
