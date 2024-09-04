@@ -6,4 +6,6 @@
 
 Exercises 
 
-- [exercise](/part9/)
+- [fit-calculators](/part9/fit-calculators)
+- [patientor](/part9/patientor)
+- [courseinfo](/part9/courseinfo)
