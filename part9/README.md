@@ -9,3 +9,4 @@ Exercises
 - [fit-calculators](/part9/fit-calculators)
 - [patientor](/part9/patientor)
 - [courseinfo](/part9/courseinfo)
+- [ilari-flights-diary](/part9/ilari-diary)
