@@ -1,55 +1,36 @@
-import Course from './components/Course'
+import Header from './components/Header'
+import Content from './components/Content'
+import Total from './components/Total'
+
+import { PartProp } from './types';
 
 const App = () => {
-  const courses = [
+
+  const courseName: string = "Half Stack application development";
+  
+  const courseParts: PartProp[] = [
     {
-      name: 'Half Stack application development',
-      id: 1,
-      parts: [
-        {
-          name: 'Fundamentals of React',
-          exercises: 10,
-          id: 1
-        },
-        {
-          name: 'Using props to pass data',
-          exercises: 7,
-          id: 2
-        },
-        {
-          name: 'State of a component',
-          exercises: 14,
-          id: 3
-        },
-        {
-          name: 'Redux',
-          exercises: 11,
-          id: 4
-        }
-      ]
-    }, 
+      name: "Fundamentals",
+      exerciseCount: 10
+    },
     {
-      name: 'Node.js',
-      id: 2,
-      parts: [
-        {
-          name: 'Routing',
-          exercises: 3,
-          id: 1
-        },
-        {
-          name: 'Middlewares',
-          exercises: 7,
-          id: 2
-        }
-      ]
+      name: "Using props to pass data",
+      exerciseCount: 7
+    },
+    {
+      name: "Deeper type usage",
+      exerciseCount: 14
     }
-  ]
+  ];
+  
+  const totalExercises: number = courseParts.reduce((sum: number, part: { name: string; exerciseCount: number }) => sum + part.exerciseCount, 0);
+ 
   return (
-    <>
-      <h1>Web development curriculum</h1>
-      { courses.map((course) => <Course key={course.id} course={course} /> ) }
-    </>
+      <div>
+        <Header name={courseName} />
+        <Content parts={courseParts} />
+        <Total total={totalExercises} />
+      </div>
   )
  
 }

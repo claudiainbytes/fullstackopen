@@ -1,3 +1,5 @@
-const Header = ({course}) => <h1>{course.name}</h1> 
+import { HeaderProps } from './../types';
+
+const Header = (props: HeaderProps) => <h1>{ props.name }</h1> 
 
 export default Header
