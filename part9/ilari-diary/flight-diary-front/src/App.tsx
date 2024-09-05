@@ -1,13 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+import Header from './components/Header'
+import Diaries from './components/Diaries'
+
+import { DiaryEntry } from './types';
+
+import diaryService from "./services/diaries"
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const diaryTitle: string = "Diary Entries";
+
+  const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
+
+  useEffect(() => {
+
+    const fetchDiariesList = async () => {
+      const diaries = await diaryService.getAll();
+      setDiaries(diaries);
+    };
+    void fetchDiariesList();
+  }, []);
 
   return (
     <>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <Header name={diaryTitle} />
+        <Diaries diaries={diaries} />
     </>
   )
 }
