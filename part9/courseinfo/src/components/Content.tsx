@@ -1,5 +1,9 @@
-import { PartProp } from './../types';
+import Part from './Part';
 
-const Content = ({parts}: {parts: PartProp[]}) => parts.map((part, k) => <p key={k}>{part.name} {part.exerciseCount}</p>);
+import { CoursePart } from './../types';
+
+const Content = ({parts}: {parts: CoursePart[]}) => 
+                    parts.map((part: CoursePart, index: number) => <Part key={index} coursepart={part} /> 
+                ); 
 
 export default Content;
