@@ -1,5 +1,10 @@
 export interface HeaderProps {
-    name: string;
+  name: string;
+}
+
+export interface NotificationProps {
+  message: string;
+  classname: string;
 }
 
 export enum Weather {
