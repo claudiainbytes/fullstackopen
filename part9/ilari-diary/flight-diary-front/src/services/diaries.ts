@@ -10,17 +10,17 @@ const getAll = async () => {
 
   return data;
 };
-/*
-const create = async (object: PatientFormValues) => {
-  const { data } = await axios.post<Patient>(
+
+const create = async (object: DiaryEntry) => {
+  const { data } = await axios.post<DiaryEntry>(
     `${apiBaseUrl}/diaries`,
     object
   );
 
   return data;
 };
-*/
+
 export default {
-  getAll
+  getAll, create
 };
 

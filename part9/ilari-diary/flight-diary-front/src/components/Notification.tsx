@@ -1,13 +1,13 @@
-import { NotificationProps } from './../types';
+import { NotificationType } from './../types';
 
-const Notification = ({ message }: { message: NotificationProps }) => {
-    if (message === null) {
+const Notification = ({ notification } : { notification: NotificationType }) => {
+    if (notification === null) {
       return null
     }
   
     return (
-      <div className={message.classname}>
-        {message.message}
+      <div className={notification.classname}>
+        {notification.message}
       </div>
     )
   }

@@ -2,10 +2,24 @@ export interface HeaderProps {
   name: string;
 }
 
-export interface NotificationProps {
+export interface NotificationType {
   message: string;
   classname: string;
 }
+
+export const notificationInitialState:NotificationType = {
+  message: '',
+  classname: '',
+};
+export interface NotificationActionReducer {
+  type: string;
+  payload: NotificationType;
+}
+
+export type FlightdiariesContextType = {
+  notification: NotificationType;
+  notificationDispatch: React.Dispatch<NotificationActionReducer>;
+};
 
 export enum Weather {
     Sunny = 'sunny',
@@ -23,10 +37,10 @@ export enum Weather {
   }
   
   export interface DiaryEntry {
-    id: number;
+    id?: number;
     date: string;
-    weather: Weather;
-    visibility: Visibility;
+    weather: Weather | string;
+    visibility: Visibility | string;
     comment: string;
   }
   
