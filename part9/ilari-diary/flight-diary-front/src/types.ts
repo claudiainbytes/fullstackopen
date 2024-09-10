@@ -35,7 +35,17 @@ export enum Weather {
     Ok = 'ok',
     Poor = 'poor',
   }
+
+  export interface KeyAndValue {
+    label: string;
+    value: string;
+  }
   
+  export interface DiaryRadioButtonProps {
+    name: string;
+    options: Array<KeyAndValue>;
+    handlerChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  }
   export interface DiaryEntry {
     id?: number;
     date: string;

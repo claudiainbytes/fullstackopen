@@ -2,14 +2,16 @@ import { useState } from 'react';
 import { DiaryEntry, NewDiaryEntry, Weather, Visibility, NotificationActionReducer } from '../types';
 import diaryService from './../services/diaries';
 import { useNotificationDispatch } from './../hooks/notificationHooks';
+import DiaryRadioButtons from './DiaryRadioButtons';
 
 const DiaryForm = () => {
 
     const notificationDispatch = useNotificationDispatch() as React.Dispatch<NotificationActionReducer>;
     
-    const [newDiary, setNewDiary] = useState<NewDiaryEntry>({ date: '', visibility: Visibility.Great, weather: Weather.Sunny, comment: '' });
-    const { date, visibility, weather, comment } = newDiary;
+    const [newDiary, setNewDiary] = useState<NewDiaryEntry>({ date: '', visibility: '', weather: '', comment: '' });
 
+    const { date, comment } = newDiary;
+    
     const handleDiaryDate: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         setNewDiary({ ...newDiary, date: event.target.value });
     };
@@ -59,33 +61,25 @@ const DiaryForm = () => {
                 <div>
                     <label htmlFor="date">Date &nbsp;</label>
                     <input
-                    type="text"
+                    type="date"
                     value={date}
                     name="date"
                     id="date"    
                     onChange={handleDiaryDate}
+                    min="2018-01-01" 
+                    max="2024-12-31"
                     />
                 </div>
-                <div>
-                    <label htmlFor="visibility">Visibility &nbsp;</label>
-                    <input
-                    type="text"
-                    value={visibility}
-                    name="visibility"
-                    id="visibility"
-                    onChange={handleDiaryVisibility}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="weather">Weather &nbsp;</label>
-                    <input
-                    type="text"
-                    value={weather}
-                    name="weather"
-                    id="weather"
-                    onChange={handleDiaryWeather}
-                    />
-                </div>
+                <DiaryRadioButtons 
+                    name='Visibility' 
+                    handlerChange={handleDiaryVisibility} 
+                    options={Object.values(Visibility).map(value => ({label: value, value: value}))}
+                />
+                <DiaryRadioButtons 
+                    name='Weather' 
+                    handlerChange={handleDiaryWeather} 
+                    options={Object.values(Weather).map(value => ({label: value, value: value}))}
+                />
                 <div>
                     <label htmlFor="comment">Comment &nbsp;</label>
                     <input

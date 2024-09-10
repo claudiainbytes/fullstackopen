@@ -21,3 +21,16 @@ body {
     padding: 10px;
     margin-bottom: 10px;
 }
+.diaryRadioButtons div {
+    display: inline-block;
+}
+.diaryRadioButtons ul {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+.diaryRadioButtons ul li {
+    display: inline;
+    list-style-type: none;
+    margin: 0
+}
