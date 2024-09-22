@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+export interface Entry {
+}
+
 export interface DiagnoseEntry {
     id?: number;
     code: string;
@@ -21,9 +25,10 @@ export interface PatientEntry {
     ssn?: string;
     gender: Gender;
     occupation: string;
+    entries: Entry[];
 }
 
 export type NewPatientEntry = Omit<PatientEntry, 'id'>;
   
-export type NonSensitivePatientEntry = Omit<PatientEntry, 'ssn'>;
+export type NonSensitivePatientEntry = Omit<PatientEntry, 'ssn' | 'entries'>;
 
