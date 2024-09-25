@@ -1,3 +1,4 @@
+import Diagnose from "./Diagnose";
 import { Entry } from "../../types";
 import { Typography, Box } from '@mui/material';
 
@@ -15,7 +16,7 @@ const Entries = ({ entries } : { entries: Array<Entry> }) => {
                         {(entry.diagnosisCodes) ?
                             <ul>
                                 { entry.diagnosisCodes.map((diagnoseCode: string, index: number) => 
-                                    <li key={index}>{diagnoseCode}</li>  
+                                    <li key={index}><Diagnose code={diagnoseCode}/></li>  
                                 )
                                 }
                             </ul> 

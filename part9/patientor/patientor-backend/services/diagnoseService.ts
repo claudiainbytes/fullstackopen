@@ -1,6 +1,6 @@
 import diagnosesData from '../data/diagnoses';
 
-import { NonSensitiveDiagnoseEntry, DiagnoseEntry } from '../types';
+import { NonSensitiveDiagnoseEntry, DiagnoseEntry, NewDiagnoseEntry } from '../types';
 
 const diagnoses: DiagnoseEntry[] = diagnosesData;
 
@@ -16,7 +16,13 @@ const getNonSensitiveEntries = (): NonSensitiveDiagnoseEntry[] => {
   }));
 };
 
+const findByCode = (code: string): NewDiagnoseEntry | undefined => {
+  const diagnose = diagnoses.find(d => d.code === code);
+  return diagnose;
+};
+
 export default {
   getEntries,
-  getNonSensitiveEntries
+  getNonSensitiveEntries,
+  findByCode
 };

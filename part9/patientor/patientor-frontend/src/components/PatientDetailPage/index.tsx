@@ -20,7 +20,7 @@ const PatientDetailPage = () => {
         };
         void fetchPatientDetail(id as string);
 
-    }, []);
+    }, [id]);
     
     if (!patient) {
         return (
