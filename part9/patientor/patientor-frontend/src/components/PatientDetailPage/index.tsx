@@ -4,6 +4,7 @@ import patientService from "./../../services/patients";
 import { PatientDetailValues } from "../../types";
 import { Grid, Typography } from '@mui/material';
 import Gender from "./Gender";
+import Entries from "./Entries";
 
 const PatientDetailPage = () => {
 
@@ -14,7 +15,7 @@ const PatientDetailPage = () => {
     useEffect(() => {
 
         const fetchPatientDetail = async (id: string): Promise<void> => {
-            const patient:PatientDetailValues = await patientService.getPatient(id);
+            const patient:PatientDetailValues | undefined = await patientService.getPatient(id);
             setPatient(patient);
         };
         void fetchPatientDetail(id as string);
@@ -42,6 +43,9 @@ const PatientDetailPage = () => {
                         ssn: {patient.ssn}<br/>
                         occupation: {patient.occupation}
                     </Typography> 
+                </Grid>
+                <Grid item>
+                    { (patient.entries) ? <Entries entries={patient.entries}/> : null }
                 </Grid>
             </Grid>
         );
