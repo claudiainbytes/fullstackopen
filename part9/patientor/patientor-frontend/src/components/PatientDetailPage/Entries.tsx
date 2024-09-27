@@ -1,6 +1,6 @@
-import Diagnose from "./Diagnose";
 import { Entry } from "../../types";
-import { Typography, Box } from '@mui/material';
+import { Typography } from '@mui/material';
+import EntryBase from "./EntryBase";
 
 const Entries = ({ entries } : { entries: Array<Entry> }) => {
     if(entries.length > 0) {
@@ -10,19 +10,7 @@ const Entries = ({ entries } : { entries: Array<Entry> }) => {
                     Entries
                 </Typography>
                 { entries.map((entry: Entry, index: number) => 
-                     <Typography component="div" style={{ marginTop: "0em", marginBottom: "0.5em" }} key={index}>
-                        <Box sx={{ fontStyle: 'normal', m: 0, display: 'inline' }}>{entry.date}</Box>
-                        <Box sx={{ fontStyle: 'italic', m: 0, display: 'inline' }}>{entry.description}</Box>
-                        {(entry.diagnosisCodes) ?
-                            <ul>
-                                { entry.diagnosisCodes.map((diagnoseCode: string, index: number) => 
-                                    <li key={index}><Diagnose code={diagnoseCode}/></li>  
-                                )
-                                }
-                            </ul> 
-                            : null 
-                        }
-                    </Typography>
+                     <EntryBase entry={entry} key={index}/>
                 )}
             </>
         );

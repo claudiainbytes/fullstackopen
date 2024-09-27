@@ -14,7 +14,7 @@ const Diagnose = ({ code }:{ code:string }) => {
         };
         void fetchDiagnose(code as string);
 
-    }, [code]);
+    }, []);
 
     if(!diagnose){
         return null;
