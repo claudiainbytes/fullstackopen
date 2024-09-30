@@ -1,11 +1,17 @@
 import patientsData from './../data/patients';
 
-import { NonSensitivePatientEntry, PatientEntry, NewPatientEntry } from '../types';
+import { 
+          NonSensitivePatientEntry, 
+          PatientEntry, 
+          NewPatientEntry, 
+          NewEntry,
+          Entry
+        } from '../types';
 
-import toNewPatientEntry from '../utils';
+import utils from '../utils';
 
 const patients: PatientEntry [] = patientsData.map(obj => {
-  const object = toNewPatientEntry(obj) as PatientEntry;
+  const object = utils.toNewPatientEntry(obj) as PatientEntry;
   object.id = obj.id;
   return object;
 });
@@ -25,23 +31,43 @@ const getNonSensitiveEntries = (): NonSensitivePatientEntry[] => {
 };
 
 const addPatient = ( patient: NewPatientEntry, uuid: string ): PatientEntry => {
-  const newPatientEntry = {
+  const newPatient = {
     id: uuid,
     ...patient
   };
 
-  patients.push(newPatientEntry);
-  return newPatientEntry;
+  patients.push(newPatient);
+  return newPatient;
 };
 
 const findById = (id: string): NewPatientEntry | undefined => {
-  const entry = patients.find(d => d.id === id);
-  return entry;
+  const patient = patients.find(p => p.id === id);
+  return patient;
 };
+
+const addEntry = ( entry: NewEntry, idPatient: string, uuid:string ): Entry | string => {
+  
+  const patient = patients.find(p => p.id === idPatient);
+  
+  const newEntry: Entry = {
+    id: uuid,
+    ...entry
+  };
+  
+  if(patient){
+    patient.entries?.push(newEntry);
+    return newEntry;
+  }
+
+  return "Patient not found";
+  
+};
+
 
 export default {
   getEntries,
   addPatient,
   getNonSensitiveEntries,
-  findById
+  findById,
+  addEntry
 };
